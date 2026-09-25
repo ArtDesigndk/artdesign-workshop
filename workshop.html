@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workshop ArtDesign | Instalação de Papel de Parede</title>
+
+    <meta name="description"
+        content="Workshop presencial ArtDesign de instalação de papel de parede. Aprenda técnicas profissionais, acabamento, remoção e muito mais.">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111c;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+            --navy: #07111c;
+            --navy-2: #0b1b2b;
+            --navy-3: #10263a;
+
+            --gold: #c9a45c;
+            --gold-light: #e4c681;
+            --gold-dark: #92733b;
+
+            --white: #ffffff;
+            --text: #dce3e8;
+            --muted: #8d9aa6;
+
+            --border: rgba(255, 255, 255, 0.10);
+
+            --radius: 24px;
+            --container: 1180px;
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(7, 17, 28, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid transparent;
+
+            transition: 0.3s ease;
+        }
+
+        header.scrolled {
+            border-bottom-color: var(--border);
+            background: rgba(7, 17, 28, 0.95);
+        }
+
+        .nav {
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            margin-top: 20px;
+            width: 120px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text);
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 12px 18px;
+
+            border-radius: 999px;
+
+            background: var(--gold);
+            color: var(--navy);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            background: var(--gold-light);
+        }
+
+        .menu-button {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: transparent;
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 0 90px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+            width: 650px;
+            height: 650px;
+
+            top: -250px;
+            right: -200px;
+
+            background: radial-gradient(circle,
+                    rgba(201, 164, 92, 0.13),
+                    transparent 70%);
+
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+            width: 500px;
+            height: 500px;
+
+            bottom: -300px;
+            left: -200px;
+
+            background: radial-gradient(circle,
+                    rgba(201, 164, 92, 0.08),
+                    transparent 70%);
+
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+
+            gap: 80px;
+
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--gold-light);
+
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 28px;
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 72px);
+            line-height: 1.03;
+
+            letter-spacing: -2px;
+
+            max-width: 700px;
+
+            margin-bottom: 26px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero-description {
+            max-width: 600px;
+
+            color: var(--text);
+
+            font-size: 18px;
+            line-height: 1.7;
+
+            margin-bottom: 34px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+
+            margin-bottom: 36px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            min-height: 52px;
+
+            padding: 0 22px;
+
+            border-radius: 14px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(201, 164, 92, 0.20);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(201, 164, 92, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .hero-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+        }
+
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-info-item svg {
+            color: var(--gold);
+            width: 18px;
+        }
+
+        .hero-info-item div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-info-item strong {
+            font-size: 13px;
+        }
+
+        .hero-info-item span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           TURMAS
+        ===================================================== */
+
+        .classes-box {
+            margin-top: 42px;
+
+            padding: 24px;
+
+            border: 1px solid rgba(201, 164, 92, 0.25);
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(145deg,
+                    rgba(201, 164, 92, 0.08),
+                    rgba(255, 255, 255, 0.02));
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .classes-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+            height: 160px;
+
+            top: -80px;
+            right: -60px;
+
+            border-radius: 50%;
+
+            background: rgba(201, 164, 92, 0.10);
+
+            filter: blur(10px);
+        }
+
+        .classes-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 18px;
+        }
+
+        .classes-title .eyebrow {
+            margin: 0;
+        }
+
+        .classes-title p {
+            color: var(--gold-light);
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .class-card {
+            display: grid;
+
+            grid-template-columns: auto 1fr auto;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 15px;
+
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            transition: 0.3s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(201, 164, 92, 0.35);
+
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .class-date {
+            width: 54px;
+            height: 54px;
+
+            border-radius: 14px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--gold);
+
+            color: var(--navy);
+        }
+
+        .class-date span {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .class-date small {
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .class-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .class-info strong {
+            font-size: 14px;
+        }
+
+        .class-info span {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .vacancies {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .vacancies-number {
+            font-size: 20px;
+            line-height: 1;
+
+            color: var(--gold-light);
+
+            font-weight: 900;
+        }
+
+        .vacancies small {
+            color: var(--muted);
+            font-size: 9px;
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           HERO VISUAL
+        ===================================================== */
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            min-height: 520px;
+
+            border-radius: 32px;
+
+            border: 1px solid rgba(201, 164, 92, 0.25);
+
+            background:
+                linear-gradient(145deg,
+                    #112a40,
+                    #081522);
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 40px 100px rgba(0, 0, 0, 0.35);
+
+            transform-style: preserve-3d;
+
+            transition: transform 0.2s ease;
+        }
+
+        .hero-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            border-radius: 50%;
+
+            top: -160px;
+            right: -140px;
+
+            border: 1px solid rgba(201, 164, 92, 0.22);
+        }
+
+        .hero-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            bottom: -150px;
+            left: -100px;
+
+            border: 1px solid rgba(201, 164, 92, 0.15);
+        }
+
+        .hero-card-content {
+            position: absolute;
+
+            inset: 0;
+
+            padding: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            z-index: 2;
+        }
+
+        .hero-card-label {
+            color: var(--gold-light);
+
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 800;
+
+            margin-bottom: 18px;
+        }
+
+        .hero-card h2 {
+            font-size: clamp(32px, 4vw, 52px);
+
+            line-height: 1;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 18px;
+        }
+
+        .hero-card p {
+            color: var(--text);
+
+            max-width: 360px;
+
+            font-size: 15px;
+        }
+
+        .hero-card-number {
+            position: absolute;
+
+            top: 40px;
+            right: 40px;
+
+            font-size: 110px;
+            font-weight: 900;
+
+            line-height: 1;
+
+            color: rgba(201, 164, 92, 0.09);
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        section {
+            padding: 110px 0;
+        }
+
+        .section-dark {
+            background: var(--navy-2);
+        }
+
+        .section-heading {
+            max-width: 700px;
+
+            margin-bottom: 55px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(34px, 4vw, 54px);
+
+            line-height: 1.05;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 18px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro-grid {
+            display: grid;
+
+            grid-template-columns: 0.8fr 1.2fr;
+
+            gap: 80px;
+
+            align-items: start;
+        }
+
+        .intro-number {
+            font-size: 120px;
+
+            line-height: 0.8;
+
+            font-weight: 900;
+
+            color: rgba(201, 164, 92, 0.13);
+        }
+
+        .intro-content h2 {
+            font-size: clamp(34px, 4vw, 52px);
+
+            line-height: 1.05;
+
+            margin-bottom: 22px;
+        }
+
+        .intro-content h2 span {
+            color: var(--gold);
+        }
+
+        .intro-content p {
+            color: var(--text);
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            max-width: 720px;
+        }
+
+
+        /* =====================================================
+           CONTENT CARDS
+        ===================================================== */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .content-card {
+            min-height: 250px;
+
+            padding: 30px;
+
+            border-radius: var(--radius);
+
+            background: rgba(255, 255, 255, 0.035);
+
+            border: 1px solid var(--border);
+
+            transition: 0.35s ease;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+
+            right: -50px;
+            bottom: -50px;
+
+            background: rgba(201, 164, 92, 0.08);
+
+            transition: 0.35s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(201, 164, 92, 0.3);
+        }
+
+        .content-card:hover::after {
+            transform: scale(1.4);
+        }
+
+        .content-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 14px;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(201, 164, 92, 0.10);
+
+            color: var(--gold);
+
+            margin-bottom: 30px;
+        }
+
+        .content-icon svg {
+            width: 21px;
+        }
+
+        .content-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 10px;
+        }
+
+        .content-card p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           INVESTMENT
+        ===================================================== */
+
+        .investment-section {
+            background:
+                radial-gradient(circle at 20% 30%,
+                    rgba(201, 164, 92, 0.08),
+                    transparent 35%),
+                var(--navy);
+        }
+
+        .investment-card {
+            max-width: 950px;
+
+            margin: 0 auto;
+
+            padding: 55px;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(201, 164, 92, 0.25);
+
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0.015));
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .investment-content .eyebrow {
+            margin-bottom: 15px;
+        }
+
+        .investment-content h2 {
+            font-size: clamp(34px, 4vw, 48px);
+
+            line-height: 1.05;
+
+            margin-bottom: 15px;
+        }
+
+        .investment-content p {
+            color: var(--muted);
+
+            font-size: 15px;
+        }
+
+        .investment-price {
+            padding: 30px;
+
+            border-radius: 22px;
+
+            background: rgba(201, 164, 92, 0.08);
+
+            border: 1px solid rgba(201, 164, 92, 0.18);
+        }
+
+        .price-label {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 10px;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+
+            margin-bottom: 6px;
+        }
+
+        .price-main strong {
+            font-size: 42px;
+
+            color: var(--gold-light);
+
+            line-height: 1;
+        }
+
+        .price-main span {
+            color: var(--text);
+
+            font-size: 14px;
+        }
+
+        .price-cash {
+            color: white;
+
+            font-size: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .price-cash strong {
+            color: var(--gold-light);
+        }
+
+        .investment-divider {
+            width: 100%;
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 20px 0;
+        }
+
+        .material-included {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+        .material-included svg {
+            color: var(--gold);
+
+            flex-shrink: 0;
+        }
+
+        .investment-price .btn {
+            width: 100%;
+        }
+
+
+        /* =====================================================
+           MENTORSHIP
+        ===================================================== */
+
+        .mentorship-section {
+            background: var(--navy-2);
+        }
+
+        .mentorship-card {
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns: 0.85fr 1.15fr;
+
+            gap: 55px;
+
+            align-items: center;
+
+            padding: 60px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(135deg,
+                    #10283e,
+                    #081522);
+
+            border: 1px solid rgba(201, 164, 92, 0.25);
+        }
+
+        .mentorship-icon {
+            width: 76px;
+            height: 76px;
+
+            border-radius: 22px;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(201, 164, 92, 0.10);
+
+            color: var(--gold-light);
+
+            margin-bottom: 25px;
+        }
+
+        .mentorship-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .mentorship-content .eyebrow {
+            margin-bottom: 14px;
+        }
+
+        .mentorship-content h2 {
+            font-size: clamp(34px, 4vw, 54px);
+
+            line-height: 1.05;
+
+            margin-bottom: 20px;
+        }
+
+        .mentorship-content p {
+            color: var(--text);
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            max-width: 650px;
+        }
+
+        .mentorship-highlight {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .mentorship-highlight div {
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            border: 1px solid var(--border);
+        }
+
+        .mentorship-highlight strong {
+            display: block;
+
+            color: var(--gold-light);
+
+            font-size: 25px;
+
+            margin-bottom: 3px;
+        }
+
+        .mentorship-highlight span {
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .mentorship-decoration {
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            right: -180px;
+            bottom: -180px;
+
+            border: 1px solid rgba(201, 164, 92, 0.15);
+        }
+
+
+        /* =====================================================
+           AUDIENCE
+        ===================================================== */
+
+        .audience-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .audience-card {
+            padding: 38px;
+
+            border-radius: 24px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(255, 255, 255, 0.03);
+
+            display: flex;
+
+            gap: 22px;
+
+            transition: 0.3s ease;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(201, 164, 92, 0.25);
+        }
+
+        .audience-number {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 14px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--gold);
+
+            color: var(--navy);
+
+            font-weight: 900;
+        }
+
+        .audience-card h3 {
+            font-size: 20px;
+
+            margin-bottom: 7px;
+        }
+
+        .audience-card p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           LOCATION
+        ===================================================== */
+
+        .location-section {
+            background: var(--navy);
+        }
+
+        .location-grid {
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .location-info h2 {
+            font-size: clamp(36px, 4vw, 55px);
+
+            line-height: 1.05;
+
+            margin-bottom: 25px;
+        }
+
+        .location-info h2 span {
+            color: var(--gold);
+        }
+
+        .location-info>p {
+            color: var(--muted);
+
+            font-size: 16px;
+
+            margin-bottom: 30px;
+        }
+
+        .location-details {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .location-detail {
+            display: flex;
+
+            gap: 14px;
+
+            align-items: flex-start;
+        }
+
+        .location-detail-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            color: var(--gold);
+
+            background: rgba(201, 164, 92, 0.08);
+        }
+
+        .location-detail strong {
+            display: block;
+
+            font-size: 14px;
+
+            margin-bottom: 2px;
+        }
+
+        .location-detail span {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .location-photo {
+            min-height: 450px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+
+            border: 1px solid rgba(201, 164, 92, 0.2);
+
+            background: var(--navy-3);
+        }
+
+        .location-photo img {
+            width: 100%;
+            height: 100%;
+
+            min-height: 450px;
+
+            object-fit: cover;
+
+            transition: 0.6s ease;
+        }
+
+        .location-photo:hover img {
+            transform: scale(1.04);
+        }
+
+        .photo-overlay {
+            position: absolute;
+
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background: rgba(7, 17, 28, 0.82);
+
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .photo-overlay span {
+            display: block;
+
+            color: var(--gold-light);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 5px;
+        }
+
+        .photo-overlay strong {
+            font-size: 17px;
+        }
+
+
+        /* =====================================================
+           FINAL CTA
+        ===================================================== */
+
+        .final-cta {
+            padding: 130px 0;
+
+            text-align: center;
+
+            background:
+                radial-gradient(circle at center,
+                    rgba(201, 164, 92, 0.12),
+                    transparent 50%),
+                var(--navy-2);
+        }
+
+        .final-cta .eyebrow {
+            justify-content: center;
+        }
+
+        .final-cta h2 {
+            max-width: 800px;
+
+            margin: 0 auto 20px;
+
+            font-size: clamp(40px, 5vw, 66px);
+
+            line-height: 1;
+
+            letter-spacing: -2px;
+        }
+
+        .final-cta h2 span {
+            color: var(--gold);
+        }
+
+        .final-cta p {
+            max-width: 600px;
+
+            margin: 0 auto 32px;
+
+            color: var(--muted);
+
+            font-size: 16px;
+        }
+
+        .final-cta .btn {
+            min-width: 240px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            padding: 40px 0;
+
+            border-top: 1px solid var(--border);
+
+            background: var(--navy);
+        }
+
+        .footer-content {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .footer-logo img {
+            width: 130px;
+        }
+
+        .footer-copy {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .footer-back {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--gold-light);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           REVEAL ANIMATION
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(30px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                position: fixed;
+
+                top: 82px;
+                left: 20px;
+                right: 20px;
+
+                padding: 22px;
+
+                flex-direction: column;
+                align-items: stretch;
+
+                background: rgba(7, 17, 28, 0.98);
+
+                border: 1px solid var(--border);
+
+                border-radius: 20px;
+
+                opacity: 0;
+                visibility: hidden;
+
+                transform: translateY(-10px);
+
+                transition: 0.3s ease;
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                padding: 10px;
+            }
+
+            .nav-cta {
+                justify-content: center;
+            }
+
+            .menu-button {
+                display: grid;
+                place-items: center;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+            }
+
+            .hero-card {
+                min-height: 450px;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+
+                gap: 25px;
+            }
+
+            .intro-number {
+                font-size: 80px;
+            }
+
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .investment-card {
+                grid-template-columns: 1fr;
+            }
+
+            .mentorship-card {
+                grid-template-columns: 1fr;
+
+                gap: 30px;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .nav {
+                height: 72px;
+            }
+
+            .nav-links {
+                top: 72px;
+            }
+
+            .logo img {
+                margin-top: 20px;
+                width: 120px;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .hero-info {
+                gap: 18px;
+            }
+
+            .classes-box {
+                padding: 18px;
+            }
+
+            .classes-title {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 7px;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                min-height: 390px;
+            }
+
+            .hero-card-content {
+                padding: 30px;
+            }
+
+            .hero-card-number {
+                font-size: 80px;
+
+                top: 30px;
+                right: 25px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .investment-card {
+                padding: 25px;
+            }
+
+            .investment-price {
+                padding: 22px;
+            }
+
+            .mentorship-card {
+                padding: 30px;
+            }
+
+            .mentorship-highlight {
+                grid-template-columns: 1fr;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .audience-card {
+                padding: 25px;
+            }
+
+            .location-photo,
+            .location-photo img {
+                min-height: 330px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .final-cta {
+                padding: 90px 0;
+            }
+
+            .final-cta h2 {
+                font-size: 43px;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .class-card {
+                grid-template-columns: auto 1fr;
+            }
+
+            .vacancies {
+                grid-column: 2;
+
+                align-items: flex-start;
+            }
+
+            .price-main strong {
+                font-size: 34px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header id="header">
+
+        <div class="container nav">
+
+            <a href="index.html" class="logo">
+                <img src="assets/logopl.png" alt="ArtDesign">
+            </a>
+
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="#workshop">Workshop</a>
+
+                <a href="#conteudo">Conteúdo</a>
+
+                <a href="#investimento">Investimento</a>
+
+                <a href="#local">Local</a>
+
+                <a href="#participar" class="nav-cta">
+                    Quero participar
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+
+            </nav>
+
+
+            <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <main>
+
+
+        <section class="hero" id="workshop">
+
+            <div class="container hero-grid">
+
+
+                <div class="hero-content reveal">
+
+                    <div class="eyebrow">
+                        WORKSHOP ARTDESIGN
+                    </div>
+
+
+                    <h1>
+                        Aprenda a instalar papéis de parede
+                        <span>profissionalmente.</span>
+                    </h1>
+
+
+                    <p class="hero-description">
+                        Uma experiência prática para quem quer aprender
+                        técnicas de instalação, acabamento, remoção e
+                        entender como transformar essa habilidade em uma
+                        nova oportunidade profissional.
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a href="#conteudo" class="btn btn-primary">
+                            Conheça o Workshop
+                            <i data-lucide="arrow-down"></i>
+                        </a>
+
+
+                        <a href="#participar" class="btn btn-secondary">
+                            Quero participar
+                            <i data-lucide="arrow-up-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-info">
+
+                        <div class="hero-info-item">
+
+                            <i data-lucide="graduation-cap"></i>
+
+                            <div>
+                                <strong>Iniciante e intermediário</strong>
+                                <span>Não precisa ter experiência</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="hero-info-item">
+
+                            <i data-lucide="wrench"></i>
+
+                            <div>
+                                <strong>Prático e presencial</strong>
+                                <span>Aprenda colocando a mão na massa</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TURMAS -->
+
+                    <div class="classes-box reveal">
+
+                        <div class="classes-title">
+
+                            <span class="eyebrow">
+                                TURMAS DISPONÍVEIS
+                            </span>
+
+                            <p>
+                                Apenas 20 vagas por turma
+                            </p>
+
+                        </div>
+
+
+                        <div class="classes-grid">
+
+
+                            <!-- TURMA 01 -->
+
+                            <div class="class-card">
+
+                                <div class="class-date">
+                                    <span>13</span>
+                                    <small>OUT</small>
+                                </div>
+
+                                <div class="class-info">
+
+                                    <strong>
+                                        Turma 01
+                                    </strong>
+
+                                    <span>
+                                        Workshop presencial
+                                    </span>
+
+                                </div>
+
+                                <div class="vacancies" data-vagas="20">
+
+                                    <span class="vacancies-number">
+                                        20
+                                    </span>
+
+                                    <small>
+                                        vagas
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- TURMA 02 -->
+
+                            <div class="class-card">
+
+                                <div class="class-date">
+                                    <span>14</span>
+                                    <small>OUT</small>
+                                </div>
+
+                                <div class="class-info">
+
+                                    <strong>
+                                        Turma 02
+                                    </strong>
+
+                                    <span>
+                                        Workshop presencial
+                                    </span>
+
+                                </div>
+
+                                <div class="vacancies" data-vagas="20">
+
+                                    <span class="vacancies-number">
+                                        20
+                                    </span>
+
+                                    <small>
+                                        vagas
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- HERO VISUAL -->
+
+                <div class="hero-visual reveal">
+
+                    <div class="hero-card" id="heroCard">
+
+                        <div class="hero-card-number">
+                            01
+                        </div>
+
+
+                        <div class="hero-card-content">
+
+                            <div class="hero-card-label">
+                                WORKSHOP
+                            </div>
+
+                            <h2>
+                                Instalação de
+                                Papel de Parede
+                            </h2>
+
+                            <p>
+                                Técnica. Prática.
+                                Acabamento. Mercado.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INTRO
+        ===================================================== -->
+
+        <section>
+
+            <div class="container intro-grid">
+
+
+                <div class="intro-number reveal">
+                    01
+                </div>
+
+
+                <div class="intro-content reveal">
+
+                    <div class="eyebrow">
+                        UMA EXPERIÊNCIA PRÁTICA
+                    </div>
+
+                    <h2>
+                        Mais do que aprender,
+                        <span>é colocar a mão na massa.</span>
+                    </h2>
+
+                    <p>
+                        O Workshop ArtDesign foi pensado para quem quer
+                        aprender de forma prática como funciona a instalação
+                        de papéis de parede e desenvolver uma habilidade
+                        que pode abrir novas possibilidades no mercado.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CONTEÚDO
+        ===================================================== -->
+
+        <section class="section-dark" id="conteudo">
+
+            <div class="container">
+
+
+                <div class="section-heading reveal">
+
+                    <div class="eyebrow">
+                        O QUE VOCÊ VAI APRENDER
+                    </div>
+
+                    <h2>
+                        Conteúdo pensado para
+                        sair da teoria.
+                    </h2>
+
+                    <p>
+                        Do preparo à finalização, você terá contato
+                        com diferentes etapas do processo de instalação.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-grid">
+
+
+                    <!-- CARD 1 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="package"></i>
+                        </div>
+
+                        <h3>
+                            Produtos e Ferramentas
+                        </h3>
+
+                        <p>
+                            Conheça os principais materiais, ferramentas
+                            e produtos utilizados durante uma instalação.
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- CARD 2 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="layers-3"></i>
+                        </div>
+
+                        <h3>
+                            Técnicas de Instalação
+                        </h3>
+
+                        <p>
+                            Aprenda fundamentos e técnicas para realizar
+                            uma instalação com mais segurança e precisão.
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- CARD 3 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="eraser"></i>
+                        </div>
+
+                        <h3>
+                            Técnicas de Remoção
+                        </h3>
+
+                        <p>
+                            Entenda como realizar a remoção corretamente
+                            evitando danos desnecessários à superfície.
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- CARD 4 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="scissors"></i>
+                        </div>
+
+                        <h3>
+                            Acabamentos e Recortes
+                        </h3>
+
+                        <p>
+                            Aprenda detalhes importantes de cortes,
+                            quinas, tomadas e acabamentos.
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- CARD 5 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="briefcase-business"></i>
+                        </div>
+
+                        <h3>
+                            Mercado de Trabalho
+                        </h3>
+
+                        <p>
+                            Entenda melhor as possibilidades de atuação
+                            para quem deseja trabalhar com instalação.
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- CARD 6 -->
+
+                    <article class="content-card reveal">
+
+                        <div class="content-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+
+                        <h3>
+                            Atendimento ao Cliente
+                        </h3>
+
+                        <p>
+                            Veja pontos importantes para atender clientes,
+                            organizar serviços e apresentar seu trabalho.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INVESTIMENTO
+        ===================================================== -->
+
+        <section class="investment-section" id="investimento">
+
+            <div class="container">
+
+
+                <div class="section-heading reveal">
+
+                    <div class="eyebrow">
+                        INVESTIMENTO
+                    </div>
+
+                    <h2>
+                        Um passo prático
+                        para começar.
+                    </h2>
+
+                    <p>
+                        Garanta sua participação em uma das duas turmas.
+                    </p>
+
+                </div>
+
+
+
+                <div class="investment-card reveal">
+
+
+                    <div class="investment-content">
+
+                        <div class="eyebrow">
+                            WORKSHOP ARTDESIGN
+                        </div>
+
+                        <h2>
+                            Invista na sua
+                            próxima habilidade.
+                        </h2>
+
+                        <p>
+                            Uma experiência presencial com conteúdo,
+                            prática e acompanhamento para você começar
+                            a desenvolver essa nova habilidade.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="investment-price">
+
+                        <div class="price-label">
+                            Parcelamento
+                        </div>
+
+                        <div class="price-main">
+
+                            <strong>
+                                3x R$ 127
+                            </strong>
+
+                        </div>
+
+
+                        <div class="price-cash">
+                            ou <strong>R$ 380 à vista</strong>
+                        </div>
+
+
+                        <div class="investment-divider"></div>
+
+
+                        <div class="material-included">
+
+                            <i data-lucide="check-circle"></i>
+
+                            <span>
+                                Todo o material necessário está incluso.
+                            </span>
+
+                        </div>
+
+
+                        <a href="#participar" class="btn btn-primary">
+                            Quero garantir minha vaga
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MENTORIA
+        ===================================================== -->
+
+        <section class="mentorship-section">
+
+            <div class="container">
+
+
+                <div class="mentorship-card reveal">
+
+
+                    <div>
+
+                        <div class="mentorship-icon">
+                            <i data-lucide="headset"></i>
+                        </div>
+
+                        <div class="eyebrow">
+                            E TEM MAIS
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="mentorship-content">
+
+                        <h2>
+                            Você não termina
+                            o Workshop sozinho.
+                        </h2>
+
+                        <p>
+                            Após o treinamento, você terá acesso a uma
+                            mentoria gratuita durante 30 dias com os
+                            profissionais, para tirar dúvidas e receber
+                            orientação durante os seus primeiros passos.
+                        </p>
+
+
+                        <div class="mentorship-highlight">
+
+                            <div>
+
+                                <strong>
+                                    30 dias
+                                </strong>
+
+                                <span>
+                                    de mentoria
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    100% gratuita
+                                </strong>
+
+                                <span>
+                                    para participantes
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mentorship-decoration"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PARA QUEM É
+        ===================================================== -->
+
+        <section>
+
+            <div class="container">
+
+
+                <div class="section-heading reveal">
+
+                    <div class="eyebrow">
+                        PARA QUEM É
+                    </div>
+
+                    <h2>
+                        Você pode começar
+                        de onde estiver.
+                    </h2>
+
+                    <p>
+                        O Workshop foi pensado para diferentes níveis
+                        de experiência.
+                    </p>
+
+                </div>
+
+
+
+                <div class="audience-grid">
+
+
+                    <article class="audience-card reveal">
+
+                        <div class="audience-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Iniciante
+                            </h3>
+
+                            <p>
+                                Para quem nunca instalou papel de parede
+                                e quer aprender desde os fundamentos.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article class="audience-card reveal">
+
+                        <div class="audience-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Intermediário
+                            </h3>
+
+                            <p>
+                                Para quem já possui alguma experiência
+                                e quer aprimorar técnicas e acabamento.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LOCAL
+        ===================================================== -->
+
+        <section class="location-section" id="local">
+
+            <div class="container location-grid">
+
+
+                <div class="location-info reveal">
+
+                    <div class="eyebrow">
+                        ONDE VAI ACONTECER
+                    </div>
+
+
+                    <h2>
+                        Um espaço preparado
+                        para a <span>experiência.</span>
+                    </h2>
+
+
+                    <p>
+                        O Workshop será realizado presencialmente em
+                        São Paulo, em um espaço preparado para receber
+                        os participantes durante o treinamento.
+                    </p>
+
+
+
+                    <div class="location-details">
+
+
+                        <div class="location-detail">
+
+                            <div class="location-detail-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Local
+                                </strong>
+
+                                <span>
+                                    NOME DO LOCAL
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="location-detail">
+
+                            <div class="location-detail-icon">
+                                <i data-lucide="navigation"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Endereço
+                                </strong>
+
+                                <span>
+                                    ENDEREÇO DO LOCAL
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="location-detail">
+
+                            <div class="location-detail-icon">
+                                <i data-lucide="map"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Cidade
+                                </strong>
+
+                                <span>
+                                    São Paulo — SP
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FOTO DO LOCAL -->
+
+                <div class="location-photo reveal">
+
+                    <img src="assets/local.png" alt="Espaço onde acontecerá o Workshop ArtDesign">
+
+                    <div class="photo-overlay">
+
+                        <span>
+                            O ESPAÇO
+                        </span>
+
+                        <strong>
+                            Workshop presencial
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CTA FINAL
+        ===================================================== -->
+
+        <section class="final-cta" id="participar">
+
+            <div class="container reveal">
+
+                <div class="eyebrow">
+                    VAGAS LIMITADAS
+                </div>
+
+
+                <h2>
+                    Pronto para dar
+                    o <span>próximo passo?</span>
+                </h2>
+
+
+                <p>
+                    Escolha uma das turmas e fale com a nossa equipe
+                    para garantir sua participação no Workshop ArtDesign.
+                </p>
+
+
+                <!--
+                    TROQUE O NÚMERO ABAIXO PELO WHATSAPP REAL.
+
+                    Exemplo:
+                    https://wa.me/5511999999999
+                -->
+
+                <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-primary">
+                    Quero garantir minha vaga
+                    <i data-lucide="message-circle"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+
+            <a href="index.html" class="footer-logo">
+
+                <img src="assets/logo.png" alt="ArtDesign">
+
+            </a>
+
+
+            <p class="footer-copy">
+                © <span id="year"></span> ArtDesign.
+                Todos os direitos reservados.
+            </p>
+
+
+            <a href="index.html" class="footer-back">
+                Voltar para o site
+                <i data-lucide="arrow-up-right"></i>
+            </a>
+
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           LUCIDE
+        ===================================================== */
+
+        lucide.createIcons();
+
+
+
+        /* =====================================================
+           HEADER SCROLL
+        ===================================================== */
+
+        const header = document.getElementById("header");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 30) {
+
+                header.classList.add("scrolled");
+
+            } else {
+
+                header.classList.remove("scrolled");
+
+            }
+
+        });
+
+
+
+        /* =====================================================
+           MENU MOBILE
+        ===================================================== */
+
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
+
+        menuButton.addEventListener("click", () => {
+
+            navLinks.classList.toggle("active");
+
+        });
+
+
+        const mobileLinks = navLinks.querySelectorAll("a");
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("active");
+
+            });
+
+        });
+
+
+
+        /* =====================================================
+           REVEAL ANIMATION
+        ===================================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+
+        const observer = new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("active");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+        revealElements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+
+
+        /* =====================================================
+           CONTADOR DE VAGAS
+           
+           PARA ALTERAR:
+           
+           data-vagas="20"
+           
+           para:
+           
+           data-vagas="15"
+           
+           ===================================================== */
+
+        const vacancyCounters =
+            document.querySelectorAll(".vacancies");
+
+
+        vacancyCounters.forEach(counter => {
+
+            const vacancies =
+                counter.getAttribute("data-vagas");
+
+            const number =
+                counter.querySelector(".vacancies-number");
+
+
+            if (number && vacancies) {
+
+                number.textContent = vacancies;
+
+            }
+
+        });
+
+
+
+        /* =====================================================
+           HERO 3D
+        ===================================================== */
+
+        const heroCard =
+            document.getElementById("heroCard");
+
+
+        if (heroCard && window.innerWidth > 950) {
+
+            heroCard.addEventListener("mousemove", (event) => {
+
+                const rect =
+                    heroCard.getBoundingClientRect();
+
+                const x =
+                    event.clientX - rect.left;
+
+                const y =
+                    event.clientY - rect.top;
+
+
+                const centerX =
+                    rect.width / 2;
+
+                const centerY =
+                    rect.height / 2;
+
+
+                const rotateX =
+                    ((y - centerY) / centerY) * -4;
+
+                const rotateY =
+                    ((x - centerX) / centerX) * 4;
+
+
+                heroCard.style.transform =
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-4px)`;
+
+            });
+
+
+            heroCard.addEventListener("mouseleave", () => {
+
+                heroCard.style.transform =
+                    "perspective(900px) rotateX(0deg) rotateY(0deg)";
+
+            });
+
+        }
+
+
+
+        /* =====================================================
+           ANO AUTOMÁTICO
+        ===================================================== */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+
+        /* =====================================================
+           ESC
+        ===================================================== */
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key === "Escape") {
+
+                navLinks.classList.remove("active");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
