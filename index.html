@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- =====================================================
+         CONFIGURAÇÕES BÁSICAS
+         ===================================================== -->
+
+    <meta charset="UTF-8">
+
+    <!-- Faz o site se adaptar a celulares e tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Descrição que pode aparecer nos resultados do Google -->
+    <meta name="description" content="ArtDesign — papel de parede, envelopamento e transformação de ambientes.">
+
+    <!-- Cor principal usada pelo navegador em dispositivos móveis -->
+    <meta name="theme-color" content="#172536">
+
+    <title>ArtDesign — Transformando ambientes</title>
+
+
+    <!-- =====================================================
+         FONTES
+         ===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =====================================================
+         CSS PRINCIPAL
+         ===================================================== -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- =====================================================
+         LUCIDE
+         
+         Biblioteca de ícones.
+         
+         Exemplo:
+         <i data-lucide="sparkles"></i>
+         
+         O JavaScript transforma esses elementos em SVG.
+         ===================================================== -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         FUNDO DECORATIVO
+         
+         Esses elementos podem receber animações pelo CSS/JS.
+         Eles não possuem conteúdo e servem apenas para criar
+         profundidade visual.
+         ===================================================== -->
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+
+    <!-- =====================================================
+         HEADER / MENU
+         ===================================================== -->
+
+    <header class="site-header">
+
+        <div class="header-inner">
+
+
+            <!-- LOGO -->
+
+            <a href="#inicio" class="brand" aria-label="ArtDesign - início">
+
+                <img src="assets/logoad.png" alt="ArtDesign">
+
+            </a>
+
+
+            <!-- NAVEGAÇÃO DESKTOP -->
+
+            <nav class="main-nav" aria-label="Navegação principal">
+
+                <a href="#inicio">Início</a>
+
+                <a href="#sobre">Sobre</a>
+
+                <a href="#servicos">Serviços</a>
+
+                <a href="#projetos">Projetos</a>
+
+                <a href="#contato">Contato</a>
+
+            </nav>
+
+
+            <!-- CTA DO HEADER -->
+
+            <a href="#contato" class="header-cta">
+
+                <span>Fale conosco</span>
+
+                <i data-lucide="arrow-up-right"></i>
+
+            </a>
+
+
+            <!-- BOTÃO MOBILE -->
+
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+
+                <i data-lucide="menu"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- MENU MOBILE -->
+
+        <nav class="mobile-nav" aria-label="Menu mobile">
+
+            <a href="#inicio">Início</a>
+
+            <a href="#sobre">Sobre</a>
+
+            <a href="#servicos">Serviços</a>
+
+            <a href="#projetos">Projetos</a>
+
+            <a href="#contato">Contato</a>
+
+            <a href="workshop.html" class="mobile-workshop-link">
+
+                Workshop de Papel de Parede
+
+                <i data-lucide="arrow-up-right"></i>
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-container">
+
+
+                <!-- COLUNA DE TEXTO -->
+
+                <div class="hero-content reveal">
+
+
+                    <!-- PEQUENO IDENTIFICADOR -->
+
+                    <div class="eyebrow">
+
+                        <span class="eyebrow-icon">
+
+                            <i data-lucide="sparkles"></i>
+
+                        </span>
+
+                        <span>ARTDESIGN • AMBIENTES</span>
+
+                    </div>
+
+
+                    <!-- TÍTULO PRINCIPAL -->
+
+                    <h1>
+
+                        Seu ambiente.
+
+                        <span>
+                            Sua identidade.
+                        </span>
+
+                    </h1>
+
+
+                    <!-- TEXTO -->
+
+                    <p class="hero-description">
+
+                        Transformamos espaços através do papel de parede,
+                        envelopamento e soluções personalizadas para criar
+                        ambientes que realmente representam você.
+
+                    </p>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="hero-actions">
+
+                        <a href="#projetos" class="btn btn-primary">
+
+                            <span>Ver projetos</span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
+
+                        <a href="#servicos" class="btn btn-secondary">
+
+                            Conheça nossos serviços
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- PEQUENOS INDICADORES -->
+
+                    <div class="hero-mini-stats">
+
+                        <div class="mini-stat">
+
+                            <strong>7+</strong>
+
+                            <span>anos de mercado</span>
+
+                        </div>
+
+
+                        <div class="mini-stat">
+
+                            <strong>1.000+</strong>
+
+                            <span>atendimentos</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     IMAGEM PRINCIPAL DO HERO
+                     ================================================= -->
+
+                <div class="hero-visual reveal">
+
+                    <div class="hero-image-card">
+
+                        <!--
+                            Substitua hero.jpg pela imagem principal
+                            que deseja utilizar no site.
+                        -->
+
+                        <img src="assets/foto1.png" alt="Projeto ArtDesign">
+
+
+                        <!-- ETIQUETA FLUTUANTE -->
+
+                        <div class="floating-card floating-card-top">
+
+                            <div class="floating-icon">
+
+                                <i data-lucide="layers-3"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>Transformação</strong>
+
+                                <span>do projeto à aplicação</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD INFERIOR -->
+
+                        <div class="floating-card floating-card-bottom">
+
+                            <span class="status-dot"></span>
+
+                            <span>Projetos personalizados</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INDICADOR DE SCROLL -->
+
+            <a href="#sobre" class="scroll-indicator">
+
+                <span>Explorar</span>
+
+                <i data-lucide="arrow-down"></i>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BLOCO INTRODUTÓRIO
+             ===================================================== -->
+
+        <section class="intro-section section-padding" id="sobre">
+
+            <div class="section-container">
+
+
+                <!-- PEQUENA TAG -->
+
+                <div class="section-tag reveal">
+
+                    <i data-lucide="circle-dot"></i>
+
+                    <span>Sobre a ArtDesign</span>
+
+                </div>
+
+
+                <!-- TÍTULO -->
+
+                <div class="intro-heading reveal">
+
+                    <h2>
+
+                        Não é apenas uma parede.
+
+                        <span>
+                            É sobre o ambiente.
+                        </span>
+
+                    </h2>
+
+                </div>
+
+
+                <!-- CONTEÚDO -->
+
+                <div class="intro-grid">
+
+
+                    <!-- TEXTO -->
+
+                    <div class="intro-text reveal">
+
+                        <p>
+
+                            A ArtDesign nasceu para transformar ambientes
+                            através de soluções que unem estética,
+                            personalidade e acabamento profissional.
+
+                        </p>
+
+                        <p>
+
+                            Trabalhamos desde a escolha da proposta até a
+                            aplicação final, acompanhando cada etapa para
+                            entregar um resultado pensado para o seu espaço.
+
+                        </p>
+
+
+                        <a href="#contato" class="text-link">
+
+                            Quero transformar meu ambiente
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- CARDS DE INFORMAÇÃO -->
+
+                    <div class="intro-cards">
+
+
+                        <div class="info-card reveal">
+
+                            <div class="info-card-icon">
+
+                                <i data-lucide="ruler"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>Precisão</strong>
+
+                                <p>
+                                    Cada projeto é pensado para o espaço.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-card reveal">
+
+                            <div class="info-card-icon">
+
+                                <i data-lucide="palette"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>Personalidade</strong>
+
+                                <p>
+                                    Soluções que combinam com sua identidade.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-card reveal">
+
+                            <div class="info-card-icon">
+
+                                <i data-lucide="badge-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>Experiência</strong>
+
+                                <p>
+                                    Mais de 7 anos transformando ambientes.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SERVIÇOS
+             ===================================================== -->
+
+        <section class="services-section section-padding" id="servicos">
+
+            <div class="section-container">
+
+
+                <!-- CABEÇALHO -->
+
+                <div class="section-header reveal">
+
+                    <div>
+
+                        <div class="section-tag">
+
+                            <i data-lucide="layers"></i>
+
+                            <span>O que fazemos</span>
+
+                        </div>
+
+                        <h2>
+                            Soluções para transformar
+                            <span>seu espaço.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+
+                        Do detalhe ao projeto completo, criamos soluções
+                        para deixar cada ambiente mais bonito,
+                        funcional e personalizado.
+
+                    </p>
+
+                </div>
+
+
+                <!-- CARDS DE SERVIÇOS -->
+
+                <div class="services-grid">
+
+
+                    <!-- SERVIÇO 01 -->
+
+                    <article class="service-card reveal">
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                01
+                            </span>
+
+                            <div class="service-icon">
+
+                                <i data-lucide="wallpaper"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="service-content">
+
+                            <h3>
+                                Papel de parede
+                            </h3>
+
+                            <p>
+
+                                Instalação de papéis de parede
+                                vinílicos e personalizados para
+                                diferentes ambientes.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="service-footer">
+
+                            <span>
+                                Instalação profissional
+                            </span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- SERVIÇO 02 -->
+
+                    <article class="service-card reveal">
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                02
+                            </span>
+
+                            <div class="service-icon">
+
+                                <i data-lucide="panels-top-left"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="service-content">
+
+                            <h3>
+                                Envelopamento
+                            </h3>
+
+                            <p>
+
+                                Renovação visual de superfícies
+                                através de envelopamento personalizado
+                                e acabamento cuidadoso.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="service-footer">
+
+                            <span>
+                                Renovação de superfícies
+                            </span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- SERVIÇO 03 -->
+
+                    <article class="service-card reveal">
+
+                        <div class="service-card-top">
+
+                            <span class="service-number">
+                                03
+                            </span>
+
+                            <div class="service-icon">
+
+                                <i data-lucide="sparkles"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="service-content">
+
+                            <h3>
+                                Personalização
+                            </h3>
+
+                            <p>
+
+                                Projetos pensados para transformar
+                                ambientes comuns em espaços com
+                                identidade própria.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="service-footer">
+
+                            <span>
+                                Projeto personalizado
+                            </span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PROJETOS
+             ===================================================== -->
+
+        <section class="projects-section section-padding" id="projetos">
+
+            <div class="section-container">
+
+
+                <!-- CABEÇALHO -->
+
+                <div class="section-header projects-header reveal">
+
+                    <div>
+
+                        <div class="section-tag">
+
+                            <i data-lucide="image"></i>
+
+                            <span>Projetos</span>
+
+                        </div>
+
+                        <h2>
+
+                            Ambientes que
+                            <span>ganham outra vida.</span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <a href="https://instagram.com/artdesignketleyedavid" target="_blank" rel="noopener noreferrer"
+                        class="outline-button">
+
+                        <i data-lucide="instagram"></i>
+
+                        <span>Ver no Instagram</span>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- GALERIA -->
+
+                <div class="projects-grid">
+
+
+                    <!-- PROJETO 01 -->
+
+                    <a href="#contato" class="project-card project-large reveal">
+
+                        <img src="assets/foto2.jpg" alt="Projeto de papel de parede ArtDesign">
+
+                        <div class="project-overlay">
+
+                            <div>
+
+                                <span>Projeto 01</span>
+
+                                <h3>
+                                    Transformação
+                                    de ambiente
+                                </h3>
+
+                            </div>
+
+                            <div class="project-arrow">
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- PROJETO 02 -->
+
+                    <a href="#contato" class="project-card reveal">
+
+                        <img src="assets/foto5.jpg" alt="Projeto personalizado ArtDesign">
+
+                        <div class="project-overlay">
+
+                            <div>
+
+                                <span>Projeto 02</span>
+
+                                <h3>
+                                    Personalidade
+                                </h3>
+
+                            </div>
+
+                            <div class="project-arrow">
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- PROJETO 03 -->
+
+                    <a href="#contato" class="project-card reveal">
+
+                        <img src="assets/foto3.jpg" alt="Projeto de envelopamento ArtDesign">
+
+                        <div class="project-overlay">
+
+                            <div>
+
+                                <span>Projeto 03</span>
+
+                                <h3>
+                                    Novo visual
+                                </h3>
+
+                            </div>
+
+                            <div class="project-arrow">
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- PROJETO 04 -->
+
+                    <a href="#contato" class="project-card project-wide reveal">
+
+                        <img src="assets/foto4.jpg" alt="Projeto ArtDesign">
+
+                        <div class="project-overlay">
+
+                            <div>
+
+                                <span>Projeto 04</span>
+
+                                <h3>
+                                    Detalhes que transformam
+                                </h3>
+
+                            </div>
+
+                            <div class="project-arrow">
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             NÚMEROS
+             ===================================================== -->
+
+        <section class="numbers-section section-padding">
+
+            <div class="section-container">
+
+                <div class="numbers-card reveal">
+
+
+                    <div class="numbers-intro">
+
+                        <div class="section-tag light-tag">
+
+                            <i data-lucide="activity"></i>
+
+                            <span>Experiência</span>
+
+                        </div>
+
+                        <h2>
+
+                            Experiência que
+                            <span>faz diferença.</span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="numbers-grid">
+
+
+                        <div class="number-item">
+
+                            <strong class="counter" data-target="7">
+                                0
+                            </strong>
+
+                            <span>
+                                anos de mercado
+                            </span>
+
+                        </div>
+
+
+                        <div class="number-item">
+
+                            <strong class="counter" data-target="1000">
+                                0
+                            </strong>
+
+                            <span>
+                                atendimentos realizados
+                            </span>
+
+                        </div>
+
+
+                        <div class="number-item">
+
+                            <strong>
+                                100%
+                            </strong>
+
+                            <span>
+                                dedicação em cada projeto
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             WORKSHOP
+             
+             O Workshop possui uma identidade própria.
+             Por isso, aqui fazemos apenas uma chamada.
+             ===================================================== -->
+
+        <section class="workshop-section section-padding" id="workshop">
+
+            <div class="section-container">
+
+                <div class="workshop-card reveal">
+
+
+                    <!-- CONTEÚDO -->
+
+                    <div class="workshop-content">
+
+
+                        <div class="section-tag">
+
+                            <i data-lucide="graduation-cap"></i>
+
+                            <span>Quer aprender?</span>
+
+                        </div>
+
+
+                        <h2>
+
+                            Transforme sua habilidade
+                            em uma <span>nova profissão.</span>
+
+                        </h2>
+
+
+                        <p>
+
+                            Conheça o Workshop de Instalação de
+                            Papel de Parede da ArtDesign e aprenda
+                            uma profissão com alta demanda.
+
+                        </p>
+
+
+                        <a href="workshop.html" class="btn btn-light">
+
+                            <span>Conhecer o workshop</span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- ELEMENTOS VISUAIS -->
+
+                    <div class="workshop-visual">
+
+                        <div class="workshop-orb orb-one"></div>
+
+                        <div class="workshop-orb orb-two"></div>
+
+
+                        <div class="workshop-floating-card">
+
+                            <i data-lucide="trending-up"></i>
+
+                            <div>
+
+                                <strong>
+                                    Nova possibilidade
+                                </strong>
+
+                                <span>
+                                    Aprenda uma nova profissão
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CONTATO
+             ===================================================== -->
+
+        <section class="contact-section section-padding" id="contato">
+
+            <div class="section-container">
+
+
+                <div class="contact-card reveal">
+
+
+                    <!-- ÍCONE -->
+
+                    <div class="contact-icon">
+
+                        <i data-lucide="message-circle"></i>
+
+                    </div>
+
+
+                    <div class="contact-content">
+
+                        <div class="section-tag">
+
+                            <i data-lucide="send"></i>
+
+                            <span>Vamos conversar</span>
+
+                        </div>
+
+
+                        <h2>
+
+                            Tem um ambiente em mente?
+
+                            <span>
+                                Vamos tirar a ideia do papel.
+                            </span>
+
+                        </h2>
+
+
+                        <p>
+
+                            Conte para a gente o que você imagina
+                            e vamos encontrar a melhor solução para
+                            transformar seu espaço.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="contact-actions">
+
+
+                        <!--
+                            IMPORTANTE:
+                            Troque o número abaixo pelo WhatsApp
+                            oficial da ArtDesign.
+                        -->
+
+                        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer"
+                            class="contact-button primary-contact">
+
+                            <i data-lucide="message-circle"></i>
+
+                            <span>
+                                Chamar no WhatsApp
+                            </span>
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
+
+                        <a href="https://instagram.com/artdesignketleyedavid" target="_blank" rel="noopener noreferrer"
+                            class="contact-button">
+
+                            <i data-lucide="instagram"></i>
+
+                            <span>
+                                @artdesignketleyedavid
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+
+            <!-- LOGO -->
+
+            <a href="#inicio" class="footer-brand">
+
+                <img src="assets/logoad.png" alt="ArtDesign">
+
+            </a>
+
+
+            <!-- TEXTO -->
+
+            <p>
+
+                Transformando ambientes com
+                personalidade e acabamento.
+
+            </p>
+
+
+            <!-- LINKS -->
+
+            <div class="footer-links">
+
+                <a href="#inicio">
+                    Início
+                </a>
+
+                <a href="#servicos">
+                    Serviços
+                </a>
+
+                <a href="#projetos">
+                    Projetos
+                </a>
+
+                <a href="workshop.html">
+                    Workshop
+                </a>
+
+            </div>
+
+
+            <!-- INSTAGRAM -->
+
+            <a href="https://instagram.com/artdesignketleyedavid" target="_blank" rel="noopener noreferrer"
+                class="footer-social" aria-label="Instagram ArtDesign">
+
+                <i data-lucide="instagram"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 ArtDesign. Todos os direitos reservados.
+            </span>
+
+            <span>
+                Papel de parede • Envelopamento • Personalização
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         
+         O script separado controla:
+         - animações de entrada
+         - menu mobile
+         - contadores
+         - efeitos de scroll
+         - microinterações
+         ===================================================== -->
+
+    <script src="js/script.js"></script>
+
+
+    <!-- Inicializa os ícones Lucide -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+</body>
+
+</html>
