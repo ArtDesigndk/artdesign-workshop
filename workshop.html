@@ -470,6 +470,40 @@
             background: rgba(255, 255, 255, 0.06);
         }
 
+        .class-button {
+            grid-column: 1 / -1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            width: 100%;
+
+            padding: 11px 14px;
+
+            border-radius: 12px;
+
+            background: var(--gold);
+            color: var(--navy);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            transition: 0.3s ease;
+        }
+
+        .class-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 164, 92, 0.18);
+        }
+
+        .class-button svg {
+            width: 15px;
+            height: 15px;
+        }
+
         .class-date {
             width: 54px;
             height: 54px;
@@ -1389,7 +1423,7 @@
         }
 
         .footer-logo img {
-            width: 130px;
+            width: 100px;
         }
 
         .footer-copy {
@@ -1429,6 +1463,216 @@
             opacity: 1;
 
             transform: translateY(0);
+        }
+
+        /* =====================================================
+   PORTFÓLIO / TRABALHOS
+===================================================== */
+
+        .portfolio-section {
+            background: var(--navy);
+            overflow: hidden;
+        }
+
+        .portfolio-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 45px;
+        }
+
+        .portfolio-heading .section-heading {
+            margin-bottom: 0;
+        }
+
+        .portfolio-controls {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .portfolio-btn {
+            width: 48px;
+            height: 48px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 14px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+
+            transform: translateY(-2px);
+        }
+
+        .portfolio-btn svg {
+            width: 19px;
+        }
+
+        .portfolio-slider {
+            position: relative;
+
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            scroll-behavior: smooth;
+
+            scrollbar-width: none;
+
+            cursor: grab;
+
+            padding-bottom: 8px;
+        }
+
+        .portfolio-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .portfolio-slider:active {
+            cursor: grabbing;
+        }
+
+        .portfolio-track {
+            display: flex;
+            gap: 18px;
+            width: max-content;
+        }
+
+        .portfolio-item {
+            width: 360px;
+            height: 450px;
+
+            flex-shrink: 0;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 24px;
+
+            border: 1px solid rgba(201, 164, 92, 0.18);
+
+            background: var(--navy-3);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 30px 24px 24px;
+
+            background:
+                linear-gradient(to top,
+                    rgba(7, 17, 28, 0.9),
+                    transparent);
+
+            pointer-events: none;
+        }
+
+        .portfolio-overlay span {
+            color: var(--gold-light);
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+        .portfolio-overlay strong {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 17px;
+        }
+
+        .portfolio-dots {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+
+            margin-top: 28px;
+        }
+
+        .portfolio-dot {
+            width: 7px;
+            height: 7px;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.2);
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .portfolio-dot.active {
+            width: 24px;
+
+            border-radius: 999px;
+
+            background: var(--gold);
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+
+            .portfolio-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .portfolio-controls {
+                width: 100%;
+            }
+
+            .portfolio-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .portfolio-item {
+                width: 82vw;
+                height: 110vw;
+                max-height: 500px;
+            }
+
         }
 
 
@@ -1819,6 +2063,8 @@
 
                             <!-- TURMA 01 -->
 
+                            <!-- TURMA 01 -->
+
                             <div class="class-card">
 
                                 <div class="class-date">
@@ -1849,6 +2095,12 @@
                                     </small>
 
                                 </div>
+
+                                <a href="https://pay.hotmart.com/X107787927Y?off=rq8u0vs8" target="_blank"
+                                    class="class-button">
+                                    Escolher esta turma
+                                    <i data-lucide="arrow-up-right"></i>
+                                </a>
 
                             </div>
 
@@ -1886,6 +2138,12 @@
                                     </small>
 
                                 </div>
+
+                                <a href="https://pay.hotmart.com/X107787927Y?off=s9lsl73u" target="_blank"
+                                    class="class-button">
+                                    Escolher esta turma
+                                    <i data-lucide="arrow-up-right"></i>
+                                </a>
 
                             </div>
 
@@ -2137,6 +2395,169 @@
 
 
                 </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+     TRABALHOS REALIZADOS
+===================================================== -->
+
+        <section class="portfolio-section" id="trabalhos">
+
+            <div class="container">
+
+                <div class="portfolio-heading">
+
+                    <div class="section-heading reveal">
+
+                        <div class="eyebrow">
+                            TRABALHOS REALIZADOS
+                        </div>
+
+                        <h2>
+                            Veja a ArtDesign
+                            <span style="color: var(--gold);">
+                                em ação.
+                            </span>
+                        </h2>
+
+                        <p>
+                            Confira alguns dos trabalhos realizados
+                            pela nossa equipe e veja o resultado
+                            de uma instalação profissional.
+                        </p>
+
+                    </div>
+
+
+                    <div class="portfolio-controls">
+
+                        <button class="portfolio-btn" id="portfolioPrev" aria-label="Foto anterior">
+
+                            <i data-lucide="arrow-left"></i>
+
+                        </button>
+
+
+                        <button class="portfolio-btn" id="portfolioNext" aria-label="Próxima foto">
+
+                            <i data-lucide="arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="portfolio-slider" id="portfolioSlider">
+
+                    <div class="portfolio-track">
+
+
+                        <article class="portfolio-item">
+
+                            <img src="assets/foto2.jpg" alt="Trabalho realizado pela ArtDesign">
+
+                            <div class="portfolio-overlay">
+
+                                <span>
+                                    ARTDESIGN
+                                </span>
+
+                                <strong>
+                                    Instalação profissional
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="portfolio-item">
+
+                            <img src="assets/foto3.jpg" alt="Trabalho realizado pela ArtDesign">
+
+                            <div class="portfolio-overlay">
+
+                                <span>
+                                    ARTDESIGN
+                                </span>
+
+                                <strong>
+                                    Instalação profissional
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="portfolio-item">
+
+                            <img src="assets/foto4.jpg" alt="Trabalho realizado pela ArtDesign">
+
+                            <div class="portfolio-overlay">
+
+                                <span>
+                                    ARTDESIGN
+                                </span>
+
+                                <strong>
+                                    Instalação profissional
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="portfolio-item">
+
+                            <img src="assets/foto5.jpg" alt="Trabalho realizado pela ArtDesign">
+
+                            <div class="portfolio-overlay">
+
+                                <span>
+                                    ARTDESIGN
+                                </span>
+
+                                <strong>
+                                    Instalação profissional
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="portfolio-item">
+
+                            <img src="assets/foto2.jpg" alt="Trabalho realizado pela ArtDesign">
+
+                            <div class="portfolio-overlay">
+
+                                <span>
+                                    ARTDESIGN
+                                </span>
+
+                                <strong>
+                                    Instalação profissional
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="portfolio-dots" id="portfolioDots"></div>
 
             </div>
 
@@ -2460,7 +2881,7 @@
                                 </strong>
 
                                 <span>
-                                    NOME DO LOCAL
+                                    Shalom Coworking - Tatuapé
                                 </span>
 
                             </div>
@@ -2482,7 +2903,7 @@
                                 </strong>
 
                                 <span>
-                                    ENDEREÇO DO LOCAL
+                                    R. Serra de Bragança, 1814 - Vila Gomes Cardim, São Paulo - SP, 03318-000
                                 </span>
 
                             </div>
@@ -2527,7 +2948,7 @@
                     <div class="photo-overlay">
 
                         <span>
-                            O ESPAÇO
+                            Shalom Coworking
                         </span>
 
                         <strong>
@@ -2602,7 +3023,7 @@
 
             <a href="index.html" class="footer-logo">
 
-                <img src="assets/logo.png" alt="ArtDesign">
+                <img src="assets/logoad.png" alt="ArtDesign">
 
             </a>
 
@@ -2844,6 +3265,187 @@
             }
 
         });
+
+        /* =====================================================
+   CARROSSEL DE TRABALHOS
+===================================================== */
+
+        const portfolioSlider =
+            document.getElementById("portfolioSlider");
+
+        const portfolioPrev =
+            document.getElementById("portfolioPrev");
+
+        const portfolioNext =
+            document.getElementById("portfolioNext");
+
+        const portfolioDots =
+            document.getElementById("portfolioDots");
+
+        const portfolioItems =
+            document.querySelectorAll(".portfolio-item");
+
+
+        let portfolioIndex = 0;
+
+
+        /* Criar indicadores */
+
+        portfolioItems.forEach((item, index) => {
+
+            const dot =
+                document.createElement("button");
+
+            dot.classList.add("portfolio-dot");
+
+            dot.setAttribute(
+                "aria-label",
+                `Ir para foto ${index + 1}`
+            );
+
+            dot.addEventListener("click", () => {
+
+                portfolioIndex = index;
+
+                updatePortfolio();
+
+            });
+
+            portfolioDots.appendChild(dot);
+
+        });
+
+
+        const dots =
+            document.querySelectorAll(".portfolio-dot");
+
+
+        function updatePortfolio() {
+
+            const item =
+                portfolioItems[portfolioIndex];
+
+            if (!item) return;
+
+
+            portfolioSlider.scrollTo({
+
+                left: item.offsetLeft,
+
+                behavior: "smooth"
+
+            });
+
+
+            dots.forEach((dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === portfolioIndex
+                );
+
+            });
+
+        }
+
+
+        portfolioPrev.addEventListener("click", () => {
+
+            portfolioIndex--;
+
+            if (portfolioIndex < 0) {
+
+                portfolioIndex =
+                    portfolioItems.length - 1;
+
+            }
+
+            updatePortfolio();
+
+        });
+
+
+        portfolioNext.addEventListener("click", () => {
+
+            portfolioIndex++;
+
+            if (
+                portfolioIndex >=
+                portfolioItems.length
+            ) {
+
+                portfolioIndex = 0;
+
+            }
+
+            updatePortfolio();
+
+        });
+
+
+        /* Primeiro indicador */
+
+        if (dots.length) {
+
+            dots[0].classList.add("active");
+
+        }
+
+
+        /* Atualiza indicador ao arrastar */
+
+        portfolioSlider.addEventListener(
+            "scroll",
+            () => {
+
+                let closest = 0;
+
+                let smallestDistance =
+                    Infinity;
+
+
+                portfolioItems.forEach(
+                    (item, index) => {
+
+                        const distance =
+                            Math.abs(
+                                item.offsetLeft -
+                                portfolioSlider.scrollLeft
+                            );
+
+
+                        if (
+                            distance <
+                            smallestDistance
+                        ) {
+
+                            smallestDistance =
+                                distance;
+
+                            closest = index;
+
+                        }
+
+                    }
+                );
+
+
+                portfolioIndex = closest;
+
+
+                dots.forEach(
+                    (dot, index) => {
+
+                        dot.classList.toggle(
+                            "active",
+                            index === closest
+                        );
+
+                    }
+                );
+
+            }
+        );
 
     </script>
 
