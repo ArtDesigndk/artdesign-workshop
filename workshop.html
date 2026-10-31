@@ -3,63 +3,757 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="robots"
-        content="noindex, nofollow"
-    >
-
-    <meta
-        name="theme-color"
-        content="#0E1971"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0e1971">
 
     <title>Portal do Aluno | ArtDesign</title>
 
-    <!-- FONTES -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
-    <!-- CSS PRINCIPAL -->
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <style>
 
-    <!-- ÍCONES -->
-    <script
-        src="https://unpkg.com/lucide@latest"
-        defer
-    ></script>
+        /* =========================================
+           ARTDESIGN — PORTAL DO ALUNO
+           CSS EXCLUSIVO DESTA PÁGINA
+        ========================================= */
 
+        :root {
+            --navy: #0e1971;
+            --navy-dark: #040821;
+            --navy-card: #080e35;
+
+            --beige: #e9e0d2;
+            --beige-light: #f3eee7;
+
+            --white: #ffffff;
+            --muted: #d1d5e5;
+
+            --line: rgba(233, 224, 210, 0.17);
+
+            --ease: cubic-bezier(.16, 1, .3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    ellipse at 85% 12%,
+                    rgba(233, 224, 210, 0.12),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    145deg,
+                    #0e1971 0%,
+                    #171e6d 55%,
+                    #0e1971 100%
+                );
+
+            color: var(--white);
+            font-family: "DM Sans", sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Manrope", sans-serif;
+            letter-spacing: -0.045em;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .shell {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           CABEÇALHO
+        ========================================= */
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            min-height: 100px;
+            padding: 12px 0 16px;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .brand img {
+            display: block;
+            width: auto;
+            height: 72px;
+            max-width: 150px;
+            object-fit: contain;
+        }
+
+        .toplabel {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        /* =========================================
+           TELA DE ACESSO
+        ========================================= */
+
+        .gate {
+            min-height: calc(100vh - 170px);
+
+            display: grid;
+            place-items: center;
+
+            padding: 65px 0 80px;
+        }
+
+        .gate-layout {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 65px;
+            width: 100%;
+        }
+
+        .gate-content {
+            animation: fadeUp .85s var(--ease) both;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 25px;
+
+            color: var(--beige);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 29px;
+            height: 1px;
+            background: var(--beige);
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: clamp(42px, 6vw, 78px);
+            font-weight: 800;
+            line-height: 1.06;
+        }
+
+        h1 em {
+            color: var(--beige);
+            font-style: normal;
+        }
+
+        .lead {
+            max-width: 510px;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* BENEFÍCIOS */
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 11px;
+            margin-top: 30px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 14px;
+
+            border: 1px solid var(--line);
+            border-radius: 30px;
+
+            color: var(--beige-light);
+            font-size: 12px;
+        }
+
+        .chip svg {
+            width: 15px;
+            height: 15px;
+            color: var(--beige);
+        }
+
+        /* =========================================
+           CARD DE LOGIN
+        ========================================= */
+
+        .login-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 39px;
+
+            background: linear-gradient(
+                145deg,
+                #202b83,
+                #10195c
+            );
+
+            border: 1px solid rgba(233, 224, 210, .28);
+            border-radius: 28px;
+
+            box-shadow: 0 28px 65px rgba(3, 9, 48, .27);
+
+            animation: fadeUp .9s .15s var(--ease) both;
+        }
+
+        .login-card::before {
+            content: "";
+
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            right: -120px;
+            top: -125px;
+
+            border: 1px solid rgba(233, 224, 210, .15);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .lock {
+            display: grid;
+            place-items: center;
+
+            width: 58px;
+            height: 58px;
+
+            margin-bottom: 29px;
+
+            background: rgba(233, 224, 210, .13);
+            color: var(--beige);
+
+            border-radius: 17px;
+        }
+
+        .lock svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .login-card h2 {
+            margin-bottom: 10px;
+            font-size: 27px;
+        }
+
+        .login-card p {
+            margin-bottom: 26px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .field-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap input {
+            width: 100%;
+
+            padding: 17px 52px 17px 17px;
+
+            background: #111a5a;
+            color: var(--white);
+
+            border: 1px solid rgba(255, 255, 255, .24);
+            border-radius: 12px;
+
+            outline: none;
+
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .input-wrap input::placeholder {
+            color: rgba(255, 255, 255, .45);
+        }
+
+        .input-wrap input:focus {
+            border-color: var(--beige);
+            box-shadow: 0 0 0 3px rgba(233, 224, 210, .15);
+        }
+
+        .eye {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+
+            display: grid;
+            place-items: center;
+
+            padding: 10px;
+
+            background: transparent;
+            color: var(--muted);
+            border: 0;
+        }
+
+        .eye svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .primary {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 11px;
+
+            padding: 16px 22px;
+
+            background: var(--beige);
+            color: var(--navy);
+
+            border: 0;
+            border-radius: 12px;
+
+            font-weight: 800;
+
+            transition:
+                transform .35s var(--ease),
+                background .3s ease,
+                box-shadow .35s ease;
+        }
+
+        .primary:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+        }
+
+        .primary svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .login-card .primary {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .error {
+            min-height: 21px;
+            margin-top: 9px;
+            color: #ffb4ae;
+            font-size: 12px;
+        }
+
+        .login-card .privacy {
+            margin: 16px 0 0;
+            color: var(--muted);
+            text-align: center;
+            font-size: 11px;
+        }
+
+        /* =========================================
+           BIBLIOTECA DO ALUNO
+        ========================================= */
+
+        .portal {
+            padding: 70px 0 100px;
+            animation: fadeUp .7s var(--ease) both;
+        }
+
+        .portal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+
+            margin-bottom: 42px;
+        }
+
+        .portal h1 {
+            margin-bottom: 13px;
+            font-size: clamp(37px, 5vw, 62px);
+        }
+
+        .portal-head p {
+            max-width: 600px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .outline {
+            padding: 12px 16px;
+
+            background: rgba(255, 255, 255, .05);
+            color: var(--white);
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            white-space: nowrap;
+
+            transition: background .3s, border-color .3s;
+        }
+
+        .outline:hover {
+            background: rgba(255, 255, 255, .1);
+            border-color: var(--beige);
+        }
+
+        /* =========================================
+           CARDS DOS MATERIAIS
+           NOVO CONTRASTE MAIS ESCURO
+        ========================================= */
+
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .material {
+            display: flex;
+            flex-direction: column;
+
+            min-height: 380px;
+            padding: 30px;
+
+            background: linear-gradient(
+                145deg,
+                #080e35 0%,
+                #040821 100%
+            );
+
+            border: 1px solid rgba(233, 224, 210, .16);
+            border-radius: 24px;
+
+            box-shadow: 0 20px 55px rgba(0, 0, 0, .18);
+
+            transition:
+                transform .4s var(--ease),
+                border-color .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .material:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(233, 224, 210, .45);
+
+            box-shadow: 0 28px 65px rgba(0, 0, 0, .28);
+        }
+
+        .material-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            margin-bottom: 42px;
+        }
+
+        .doc-icon {
+            display: grid;
+            place-items: center;
+
+            width: 64px;
+            height: 64px;
+
+            background: rgba(233, 224, 210, .1);
+            color: var(--beige);
+
+            border-radius: 18px;
+        }
+
+        .doc-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .index {
+            color: rgba(233, 224, 210, .18);
+            font-family: "Manrope", sans-serif;
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .badge {
+            margin-bottom: 12px;
+
+            color: var(--beige);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .13em;
+        }
+
+        .material h2 {
+            margin-bottom: 13px;
+
+            color: var(--white);
+            font-size: clamp(22px, 2.5vw, 30px);
+            line-height: 1.2;
+        }
+
+        .material p {
+            margin-bottom: 26px;
+
+            color: rgba(255, 255, 255, .72);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .material .primary {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        /* =========================================
+           AVISO
+        ========================================= */
+
+        .info {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+
+            margin-top: 28px;
+            padding: 23px;
+
+            background: rgba(255, 255, 255, .05);
+
+            border: 1px solid var(--line);
+            border-radius: 18px;
+        }
+
+        .info svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            color: var(--beige);
+        }
+
+        .info p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 27px 0 35px;
+
+            border-top: 1px solid var(--line);
+
+            color: rgba(255, 255, 255, .55);
+            font-size: 12px;
+        }
+
+        /* =========================================
+           ANIMAÇÕES
+        ========================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 820px) {
+
+            .gate-layout {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .gate {
+                padding: 55px 0;
+            }
+
+            .login-card {
+                max-width: 540px;
+                width: 100%;
+            }
+
+            .portal-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .material-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .material {
+                min-height: 340px;
+            }
+        }
+
+        /* =========================================
+           CELULAR
+        ========================================= */
+
+        @media (max-width: 480px) {
+
+            .shell {
+                width: calc(100% - 32px);
+            }
+
+            .topbar {
+                padding: 18px 0;
+            }
+
+            .brand img {
+                height: 52px;
+                max-width: 125px;
+            }
+
+            .toplabel {
+                font-size: 9px;
+                letter-spacing: .08em;
+                text-align: right;
+            }
+
+            .gate {
+                min-height: auto;
+                padding: 55px 0 75px;
+            }
+
+            h1 {
+                font-size: clamp(39px, 11vw, 55px);
+            }
+
+            .lead {
+                font-size: 15px;
+            }
+
+            .login-card {
+                padding: 26px;
+            }
+
+            .portal {
+                padding: 55px 0 75px;
+            }
+
+            .material {
+                padding: 25px;
+            }
+
+            .material .primary {
+                width: 100%;
+            }
+
+            .outline {
+                width: 100%;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* =========================================
+           ACESSIBILIDADE
+        ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+    </style>
 </head>
 
-<!-- CLASSE QUE ATIVA OS ESTILOS EXCLUSIVOS DO PORTAL -->
-<body class="student-page">
+<body>
 
     <div class="shell">
 
-        <!-- ==========================================
-             CABEÇALHO
-        =========================================== -->
+        <!-- CABEÇALHO -->
 
         <header class="topbar">
 
@@ -68,14 +762,12 @@
                 href="./index.html"
                 aria-label="Voltar ao site ArtDesign"
             >
-
                 <img
                     src="assets/logoad.png"
                     alt="ArtDesign"
                     width="148"
                     height="72"
                 >
-
             </a>
 
             <span class="toplabel">
@@ -84,12 +776,9 @@
 
         </header>
 
-
         <main>
 
-            <!-- ==========================================
-                 TELA DE ACESSO
-            =========================================== -->
+            <!-- TELA DE ACESSO -->
 
             <section
                 class="gate"
@@ -98,8 +787,6 @@
             >
 
                 <div class="gate-layout">
-
-                    <!-- APRESENTAÇÃO -->
 
                     <div class="gate-content">
 
@@ -119,73 +806,47 @@
                             para a prática.
                         </p>
 
-                        <!-- BENEFÍCIOS -->
-
                         <div class="chips">
 
                             <span class="chip">
-
                                 <i data-lucide="book-open"></i>
-
                                 Conteúdo técnico
-
                             </span>
 
                             <span class="chip">
-
                                 <i data-lucide="download"></i>
-
                                 Materiais em PDF
-
                             </span>
 
                             <span class="chip">
-
                                 <i data-lucide="graduation-cap"></i>
-
                                 Exclusivo para alunos
-
                             </span>
 
                         </div>
 
                     </div>
 
-
-                    <!-- ==================================
-                         CARD DE LOGIN
-                    =================================== -->
+                    <!-- LOGIN -->
 
                     <div class="login-card">
 
                         <div class="lock">
-
                             <i data-lucide="lock-keyhole"></i>
-
                         </div>
 
-                        <h2>
-                            Bem-vindo ao portal.
-                        </h2>
+                        <h2>Bem-vindo ao portal.</h2>
 
                         <p>
-                            Para continuar, insira a
-                            palavra-chave disponibilizada
-                            durante o workshop.
+                            Para continuar, insira a palavra-chave
+                            disponibilizada durante o workshop.
                         </p>
-
-
-                        <!-- FORMULÁRIO -->
 
                         <form id="access-form">
 
-                            <label
-                                class="field-label"
-                                for="pass"
-                            >
+                            <label class="field-label" for="pass">
                                 Palavra-chave de acesso
                             </label>
-
 
                             <div class="input-wrap">
 
@@ -204,15 +865,10 @@
                                     id="toggle"
                                     aria-label="Mostrar palavra-chave"
                                 >
-
                                     <i data-lucide="eye"></i>
-
                                 </button>
 
                             </div>
-
-
-                            <!-- MENSAGEM DE ERRO -->
 
                             <div
                                 class="error"
@@ -221,22 +877,12 @@
                                 aria-live="polite"
                             ></div>
 
-
-                            <!-- BOTÃO -->
-
-                            <button
-                                class="primary"
-                                type="submit"
-                            >
-
+                            <button class="primary" type="submit">
                                 Acessar materiais
-
                                 <i data-lucide="arrow-right"></i>
-
                             </button>
 
                         </form>
-
 
                         <p class="privacy">
                             Material de apoio • ArtDesign
@@ -248,10 +894,7 @@
 
             </section>
 
-
-            <!-- ==========================================
-                 ÁREA DOS MATERIAIS
-            =========================================== -->
+            <!-- BIBLIOTECA -->
 
             <section
                 class="portal"
@@ -259,8 +902,6 @@
                 hidden
                 aria-labelledby="portal-title"
             >
-
-                <!-- CABEÇALHO DA BIBLIOTECA -->
 
                 <div class="portal-head">
 
@@ -271,24 +912,16 @@
                         </div>
 
                         <h1 id="portal-title">
-
-                            Biblioteca
-
-                            <em>ArtDesign.</em>
-
+                            Biblioteca <em>ArtDesign.</em>
                         </h1>
 
                         <p>
-                            Seu material de estudo está
-                            disponível abaixo.
-
-                            Escolha um arquivo e faça o
-                            download para consultar sempre
-                            que precisar.
+                            Seu material de estudo está disponível
+                            abaixo. Escolha um arquivo e faça o
+                            download para consultar sempre que precisar.
                         </p>
 
                     </div>
-
 
                     <button
                         class="outline"
@@ -300,137 +933,102 @@
 
                 </div>
 
-
-                <!-- ==================================
-                     GRID DE MATERIAIS
-                =================================== -->
+                <!-- MATERIAIS -->
 
                 <div class="material-grid">
 
-
-                    <!-- MATERIAL 01 -->
+                    <!-- APOSTILA -->
 
                     <article class="material">
 
                         <div class="material-top">
 
                             <div class="doc-icon">
-
                                 <i data-lucide="book-open-check"></i>
-
                             </div>
 
-                            <span class="index">
-                                01
-                            </span>
+                            <span class="index">01</span>
 
                         </div>
-
 
                         <div class="badge">
                             APOSTILA TÉCNICA • PDF
                         </div>
 
-
                         <h2>
                             Workshop Parede Lucrativa
                         </h2>
 
-
                         <p>
-                            Fundamentos do papel de parede,
-                            medição, ferramentas, preparação
-                            de superfícies, atendimento,
-                            remoção e orientações sobre
-                            o mercado de trabalho.
+                            Fundamentos do papel de parede, medição,
+                            ferramentas, preparação de superfícies,
+                            atendimento, remoção e orientações
+                            sobre o mercado de trabalho.
                         </p>
-
 
                         <a
                             class="primary"
                             href="materiais/apostila-tecnica.pdf"
                             download="ArtDesign-Apostila-Tecnica.pdf"
                         >
-
                             Baixar apostila
-
                             <i data-lucide="download"></i>
-
                         </a>
 
                     </article>
 
-
-
-                    <!-- MATERIAL 02 -->
+                    <!-- HISTÓRIA EM QUADRINHOS -->
 
                     <article class="material">
 
                         <div class="material-top">
 
                             <div class="doc-icon">
-
                                 <i data-lucide="panels-top-left"></i>
-
                             </div>
 
-                            <span class="index">
-                                02
-                            </span>
+                            <span class="index">02</span>
 
                         </div>
-
 
                         <div class="badge">
                             HISTÓRIA EM QUADRINHOS • PDF
                         </div>
 
-
                         <h2>
-                            Trabalho bem feito,
-                            cliente satisfeito
+                            Trabalho bem feito, cliente satisfeito
                         </h2>
 
-
                         <p>
-                            Uma história visual que acompanha
-                            o atendimento ao cliente, desde
-                            o primeiro contato e planejamento
-                            até a instalação, os acabamentos
-                            e a entrega final.
+                            Uma história visual que acompanha o
+                            atendimento ao cliente, desde o primeiro
+                            contato e planejamento até a instalação,
+                            os acabamentos e a entrega final.
                         </p>
-
 
                         <a
                             class="primary"
                             href="materiais/hq-artdesign.pdf"
                             download="ArtDesign-Guia-Pratico-Atendimento.pdf"
                         >
-
                             Baixar HQ
-
                             <i data-lucide="download"></i>
-
                         </a>
 
                     </article>
 
                 </div>
 
-
-                <!-- INFORMAÇÃO -->
+                <!-- AVISO -->
 
                 <div class="info">
 
                     <i data-lucide="info"></i>
 
                     <p>
-                        Os arquivos são disponibilizados em
-                        formato PDF.
-
-                        Você pode salvá-los no celular ou
-                        computador para estudar mesmo sem
-                        conexão com a internet.
+                        Os arquivos são disponibilizados em formato PDF.
+                        Você pode salvá-los no celular ou computador
+                        para estudar mesmo sem conexão com a internet.
                     </p>
 
                 </div>
@@ -439,16 +1037,12 @@
 
         </main>
 
-
-        <!-- ==========================================
-             RODAPÉ
-        =========================================== -->
+        <!-- RODAPÉ -->
 
         <footer class="footer">
 
             <span>
-                © 2026 ArtDesign.
-                Todos os direitos reservados.
+                © 2026 ArtDesign. Todos os direitos reservados.
             </span>
 
             <span>
@@ -459,10 +1053,7 @@
 
     </div>
 
-
-    <!-- ==========================================
-         JAVASCRIPT EXCLUSIVO DO PORTAL
-    =========================================== -->
+    <!-- JAVASCRIPT EXCLUSIVO DO PORTAL -->
 
     <script>
 
@@ -470,32 +1061,17 @@
 
             "use strict";
 
-
-            /* ELEMENTOS */
-
             const gate = document.getElementById("gate");
-
             const portal = document.getElementById("portal");
-
             const form = document.getElementById("access-form");
-
             const pass = document.getElementById("pass");
-
             const error = document.getElementById("error");
-
             const toggle = document.getElementById("toggle");
-
             const exit = document.getElementById("exit");
-
-
-            /* ======================================
-               ABRIR PORTAL
-            ======================================= */
 
             function enter() {
 
                 gate.hidden = true;
-
                 portal.hidden = false;
 
                 sessionStorage.setItem(
@@ -503,145 +1079,77 @@
                     "ok"
                 );
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "instant"
-                });
-
+                window.scrollTo(0, 0);
             }
-
-
-            /* ======================================
-               SAIR DO PORTAL
-            ======================================= */
 
             function leave() {
 
-                sessionStorage.removeItem(
-                    "artdesignPortal"
-                );
+                sessionStorage.removeItem("artdesignPortal");
 
                 portal.hidden = true;
-
                 gate.hidden = false;
 
                 pass.value = "";
-
                 error.textContent = "";
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "instant"
-                });
-
+                window.scrollTo(0, 0);
             }
 
+            form.addEventListener("submit", function (event) {
 
-            /* ======================================
-               VALIDAR PALAVRA-CHAVE
-            ======================================= */
+                event.preventDefault();
 
-            form.addEventListener(
-                "submit",
-                function (event) {
+                const palavra = pass.value
+                    .trim()
+                    .toLowerCase();
 
-                    event.preventDefault();
+                if (palavra === "vidanova") {
 
-                    const palavra = pass.value
-                        .trim()
-                        .toLowerCase();
+                    error.textContent = "";
+                    enter();
 
-                    if (palavra === "vidanova") {
+                } else {
 
-                        error.textContent = "";
+                    error.textContent =
+                        "Palavra-chave incorreta. Confira e tente novamente.";
 
-                        enter();
+                    pass.focus();
+                }
 
-                    } else {
+            });
 
-                        error.textContent =
-                            "Palavra-chave incorreta. Confira e tente novamente.";
+            exit.addEventListener("click", leave);
 
-                        pass.focus();
+            toggle.addEventListener("click", function () {
 
-                    }
+                const mostrar = pass.type === "password";
+
+                pass.type = mostrar ? "text" : "password";
+
+                toggle.setAttribute(
+                    "aria-label",
+                    mostrar
+                        ? "Ocultar palavra-chave"
+                        : "Mostrar palavra-chave"
+                );
+
+                const icone = toggle.querySelector("svg");
+
+                if (icone) {
+
+                    icone.innerHTML = mostrar
+                        ? '<path d="M10.58 10.59a2 2 0 0 0 2.83 2.82"/><path d="M9.88 5.09A10.9 10.9 0 0 1 12 4.9c7 0 10 7.1 10 7.1a13.2 13.2 0 0 1-4.2 5.1"/><path d="M6.61 6.61A13.2 13.2 0 0 0 2 12s3 7.1 10 7.1a10.9 10.9 0 0 0 5.39-1.51"/><path d="m2 2 20 20"/>'
+                        : '<path d="M2.06 12a1.9 1.9 0 0 1 0-1.8C3.7 7.4 7.2 4.9 12 4.9s8.3 2.5 9.94 5.3a1.9 1.9 0 0 1 0 1.8C20.3 14.8 16.8 17.3 12 17.3S3.7 14.8 2.06 12Z"/><circle cx="12" cy="11.1" r="3"/>';
 
                 }
-            );
 
-
-            /* ======================================
-               BOTÃO SAIR
-            ======================================= */
-
-            exit.addEventListener(
-                "click",
-                leave
-            );
-
-
-            /* ======================================
-               MOSTRAR / OCULTAR SENHA
-            ======================================= */
-
-            toggle.addEventListener(
-                "click",
-                function () {
-
-                    const mostrar =
-                        pass.type === "password";
-
-                    pass.type = mostrar
-                        ? "text"
-                        : "password";
-
-                    toggle.setAttribute(
-                        "aria-label",
-                        mostrar
-                            ? "Ocultar palavra-chave"
-                            : "Mostrar palavra-chave"
-                    );
-
-                    const icon = toggle.querySelector("i");
-
-                    if (icon) {
-
-                        icon.setAttribute(
-                            "data-lucide",
-                            mostrar ? "eye-off" : "eye"
-                        );
-
-                        if (
-                            window.lucide &&
-                            typeof window.lucide.createIcons === "function"
-                        ) {
-                            window.lucide.createIcons();
-                        }
-
-                    }
-
-                }
-            );
-
-
-            /* ======================================
-               RESTAURAR ACESSO NA SESSÃO
-            ======================================= */
+            });
 
             if (
-                sessionStorage.getItem(
-                    "artdesignPortal"
-                ) === "ok"
+                sessionStorage.getItem("artdesignPortal") === "ok"
             ) {
-
                 enter();
-
             }
-
-
-            /* ======================================
-               INICIALIZAR ÍCONES
-            ======================================= */
 
             function iniciarIcones() {
 
@@ -649,11 +1157,8 @@
                     window.lucide &&
                     typeof window.lucide.createIcons === "function"
                 ) {
-
                     window.lucide.createIcons();
-
                 }
-
             }
 
             if (document.readyState === "loading") {
@@ -666,13 +1171,9 @@
             } else {
 
                 iniciarIcones();
-
             }
 
-            window.addEventListener(
-                "load",
-                iniciarIcones
-            );
+            window.addEventListener("load", iniciarIcones);
 
         })();
 
