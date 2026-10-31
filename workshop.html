@@ -1,28 +1,682 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<link rel="stylesheet" href="css/style.css">
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0e1971">
-<title>Portal do Aluno | ArtDesign</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0E1971"
+    >
+
+    <title>Portal do Aluno | ArtDesign</title>
+
+    <!-- FONTES -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS PRINCIPAL -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <!-- ÍCONES -->
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
 
 </head>
+
+<!-- CLASSE QUE ATIVA OS ESTILOS EXCLUSIVOS DO PORTAL -->
 <body class="student-page">
-<div class="shell"><header class="topbar"><a class="brand" href="./index.html" aria-label="ArtDesign — voltar ao site"><img src="assets/logoad.png" alt="ArtDesign" width="148" height="72"></a><span class="toplabel">Área exclusiva do aluno</span></header>
-<main>
-<section class="gate" id="gate" aria-labelledby="gate-title"><div class="gate-layout"><div><div class="eyebrow">Workshop Parede Lucrativa</div><h1 id="gate-title">Seu aprendizado <em>continua aqui.</em></h1><p class="lead">Um espaço exclusivo para você acessar os materiais de apoio, revisar os conteúdos e levar o conhecimento para a prática.</p><div class="chips"><span class="chip"><i data-lucide="book-open"></i> Conteúdo técnico</span><span class="chip"><i data-lucide="download"></i> Materiais em PDF</span><span class="chip"><i data-lucide="graduation-cap"></i> Exclusivo para alunos</span></div></div><div class="login-card"><div class="lock"><i data-lucide="lock-keyhole"></i></div><h2>Bem-vindo ao portal.</h2><p>Para continuar, insira a palavra-chave disponibilizada durante o workshop.</p><form id="access-form"><label class="field-label" for="pass">Palavra-chave de acesso</label><div class="input-wrap"><input id="pass" type="password" placeholder="Digite sua palavra-chave" autocomplete="off" required aria-describedby="error"><button class="eye" type="button" id="toggle" aria-label="Mostrar palavra-chave"><i data-lucide="eye"></i></button></div><div class="error" id="error" role="alert" aria-live="polite"></div><button class="primary" type="submit">Acessar materiais <i data-lucide="arrow-right"></i></button></form><p class="privacy">Material de apoio • ArtDesign</p></div></div></section>
-<section class="portal" id="portal" hidden aria-labelledby="portal-title"><div class="portal-head"><div><div class="eyebrow">Acesso liberado • Materiais do aluno</div><h1 id="portal-title">Biblioteca <em style="color:var(--beige);font-style:normal">ArtDesign.</em></h1><p>Seu material de estudo está disponível abaixo. Escolha um arquivo e faça o download para consultar sempre que precisar.</p></div><button class="outline" id="exit" type="button">Sair do portal</button></div><div class="material-grid"><article class="material"><div class="material-top"><div class="doc-icon"><i data-lucide="book-open-check"></i></div><span class="index">01</span></div><div class="badge">APOSTILA TÉCNICA • PDF</div><h2>Workshop Parede Lucrativa</h2><p>Fundamentos do papel de parede, medição, ferramentas, preparação de superfícies, atendimento, remoção e orientações sobre o mercado de trabalho.</p><a class="primary" href="materiais/apostila-tecnica.pdf" download="ArtDesign-Apostila-Tecnica.pdf">Baixar apostila <i data-lucide="download"></i></a></article><article class="material"><div class="material-top"><div class="doc-icon"><i data-lucide="panels-top-left"></i></div><span class="index">02</span></div><div class="badge">HISTÓRIA EM QUADRINHOS • PDF</div><h2>Trabalho bem feito, cliente satisfeito</h2><p>Uma história visual que acompanha o atendimento ao cliente, desde o primeiro contato e planejamento até a instalação, os acabamentos e a entrega final.</p><a class="primary" href="materiais/hq-artdesign.pdf" download="ArtDesign-Guia-Pratico-Atendimento.pdf">Baixar HQ <i data-lucide="download"></i></a></article></div><div class="info"><i data-lucide="info"></i><p>Os arquivos são disponibilizados em formato PDF. Você pode salvá-los no celular ou computador para estudar mesmo sem conexão com a internet.</p></div></section>
-</main><footer class="footer"><span>© 2026 ArtDesign. Todos os direitos reservados.</span><span>Excelência é nossa especialidade.</span></footer></div>
-<script>
-const gate=document.getElementById('gate'),portal=document.getElementById('portal'),form=document.getElementById('access-form'),pass=document.getElementById('pass'),error=document.getElementById('error');
-function enter(){gate.hidden=true;portal.hidden=false;sessionStorage.setItem('artdesignPortal','ok');window.scrollTo(0,0)}
-function leave(){sessionStorage.removeItem('artdesignPortal');portal.hidden=true;gate.hidden=false;pass.value='';error.textContent='';window.scrollTo(0,0)}
-form.addEventListener('submit',e=>{e.preventDefault();if(pass.value.trim().toLowerCase()==='vidanova'){error.textContent='';enter()}else{error.textContent='Palavra-chave incorreta. Confira e tente novamente.';pass.focus()}});
-document.getElementById('exit').addEventListener('click',leave);
-document.getElementById('toggle').addEventListener('click',()=>{let show=pass.type==='password';pass.type=show?'text':'password';document.getElementById('toggle').setAttribute('aria-label',show?'Ocultar palavra-chave':'Mostrar palavra-chave')});
-if(sessionStorage.getItem('artdesignPortal')==='ok')enter();if(window.lucide)lucide.createIcons();
-</script>
-</body></html>
+
+    <div class="shell">
+
+        <!-- ==========================================
+             CABEÇALHO
+        =========================================== -->
+
+        <header class="topbar">
+
+            <a
+                class="brand"
+                href="./index.html"
+                aria-label="Voltar ao site ArtDesign"
+            >
+
+                <img
+                    src="assets/logoad.png"
+                    alt="ArtDesign"
+                    width="148"
+                    height="72"
+                >
+
+            </a>
+
+            <span class="toplabel">
+                Área exclusiva do aluno
+            </span>
+
+        </header>
+
+
+        <main>
+
+            <!-- ==========================================
+                 TELA DE ACESSO
+            =========================================== -->
+
+            <section
+                class="gate"
+                id="gate"
+                aria-labelledby="gate-title"
+            >
+
+                <div class="gate-layout">
+
+                    <!-- APRESENTAÇÃO -->
+
+                    <div class="gate-content">
+
+                        <div class="eyebrow">
+                            Workshop Parede Lucrativa
+                        </div>
+
+                        <h1 id="gate-title">
+                            Seu aprendizado
+                            <em>continua aqui.</em>
+                        </h1>
+
+                        <p class="lead">
+                            Um espaço exclusivo para você acessar
+                            os materiais de apoio, revisar os
+                            conteúdos e levar o conhecimento
+                            para a prática.
+                        </p>
+
+                        <!-- BENEFÍCIOS -->
+
+                        <div class="chips">
+
+                            <span class="chip">
+
+                                <i data-lucide="book-open"></i>
+
+                                Conteúdo técnico
+
+                            </span>
+
+                            <span class="chip">
+
+                                <i data-lucide="download"></i>
+
+                                Materiais em PDF
+
+                            </span>
+
+                            <span class="chip">
+
+                                <i data-lucide="graduation-cap"></i>
+
+                                Exclusivo para alunos
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================================
+                         CARD DE LOGIN
+                    =================================== -->
+
+                    <div class="login-card">
+
+                        <div class="lock">
+
+                            <i data-lucide="lock-keyhole"></i>
+
+                        </div>
+
+                        <h2>
+                            Bem-vindo ao portal.
+                        </h2>
+
+                        <p>
+                            Para continuar, insira a
+                            palavra-chave disponibilizada
+                            durante o workshop.
+                        </p>
+
+
+                        <!-- FORMULÁRIO -->
+
+                        <form id="access-form">
+
+                            <label
+                                class="field-label"
+                                for="pass"
+                            >
+                                Palavra-chave de acesso
+                            </label>
+
+
+                            <div class="input-wrap">
+
+                                <input
+                                    id="pass"
+                                    type="password"
+                                    placeholder="Digite sua palavra-chave"
+                                    autocomplete="off"
+                                    required
+                                    aria-describedby="error"
+                                >
+
+                                <button
+                                    class="eye"
+                                    type="button"
+                                    id="toggle"
+                                    aria-label="Mostrar palavra-chave"
+                                >
+
+                                    <i data-lucide="eye"></i>
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- MENSAGEM DE ERRO -->
+
+                            <div
+                                class="error"
+                                id="error"
+                                role="alert"
+                                aria-live="polite"
+                            ></div>
+
+
+                            <!-- BOTÃO -->
+
+                            <button
+                                class="primary"
+                                type="submit"
+                            >
+
+                                Acessar materiais
+
+                                <i data-lucide="arrow-right"></i>
+
+                            </button>
+
+                        </form>
+
+
+                        <p class="privacy">
+                            Material de apoio • ArtDesign
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 ÁREA DOS MATERIAIS
+            =========================================== -->
+
+            <section
+                class="portal"
+                id="portal"
+                hidden
+                aria-labelledby="portal-title"
+            >
+
+                <!-- CABEÇALHO DA BIBLIOTECA -->
+
+                <div class="portal-head">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Acesso liberado • Materiais do aluno
+                        </div>
+
+                        <h1 id="portal-title">
+
+                            Biblioteca
+
+                            <em>ArtDesign.</em>
+
+                        </h1>
+
+                        <p>
+                            Seu material de estudo está
+                            disponível abaixo.
+
+                            Escolha um arquivo e faça o
+                            download para consultar sempre
+                            que precisar.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="outline"
+                        id="exit"
+                        type="button"
+                    >
+                        Sair do portal
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================
+                     GRID DE MATERIAIS
+                =================================== -->
+
+                <div class="material-grid">
+
+
+                    <!-- MATERIAL 01 -->
+
+                    <article class="material">
+
+                        <div class="material-top">
+
+                            <div class="doc-icon">
+
+                                <i data-lucide="book-open-check"></i>
+
+                            </div>
+
+                            <span class="index">
+                                01
+                            </span>
+
+                        </div>
+
+
+                        <div class="badge">
+                            APOSTILA TÉCNICA • PDF
+                        </div>
+
+
+                        <h2>
+                            Workshop Parede Lucrativa
+                        </h2>
+
+
+                        <p>
+                            Fundamentos do papel de parede,
+                            medição, ferramentas, preparação
+                            de superfícies, atendimento,
+                            remoção e orientações sobre
+                            o mercado de trabalho.
+                        </p>
+
+
+                        <a
+                            class="primary"
+                            href="materiais/apostila-tecnica.pdf"
+                            download="ArtDesign-Apostila-Tecnica.pdf"
+                        >
+
+                            Baixar apostila
+
+                            <i data-lucide="download"></i>
+
+                        </a>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 02 -->
+
+                    <article class="material">
+
+                        <div class="material-top">
+
+                            <div class="doc-icon">
+
+                                <i data-lucide="panels-top-left"></i>
+
+                            </div>
+
+                            <span class="index">
+                                02
+                            </span>
+
+                        </div>
+
+
+                        <div class="badge">
+                            HISTÓRIA EM QUADRINHOS • PDF
+                        </div>
+
+
+                        <h2>
+                            Trabalho bem feito,
+                            cliente satisfeito
+                        </h2>
+
+
+                        <p>
+                            Uma história visual que acompanha
+                            o atendimento ao cliente, desde
+                            o primeiro contato e planejamento
+                            até a instalação, os acabamentos
+                            e a entrega final.
+                        </p>
+
+
+                        <a
+                            class="primary"
+                            href="materiais/hq-artdesign.pdf"
+                            download="ArtDesign-Guia-Pratico-Atendimento.pdf"
+                        >
+
+                            Baixar HQ
+
+                            <i data-lucide="download"></i>
+
+                        </a>
+
+                    </article>
+
+                </div>
+
+
+                <!-- INFORMAÇÃO -->
+
+                <div class="info">
+
+                    <i data-lucide="info"></i>
+
+                    <p>
+                        Os arquivos são disponibilizados em
+                        formato PDF.
+
+                        Você pode salvá-los no celular ou
+                        computador para estudar mesmo sem
+                        conexão com a internet.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- ==========================================
+             RODAPÉ
+        =========================================== -->
+
+        <footer class="footer">
+
+            <span>
+                © 2026 ArtDesign.
+                Todos os direitos reservados.
+            </span>
+
+            <span>
+                Excelência é nossa especialidade.
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT EXCLUSIVO DO PORTAL
+    =========================================== -->
+
+    <script>
+
+        (function () {
+
+            "use strict";
+
+
+            /* ELEMENTOS */
+
+            const gate = document.getElementById("gate");
+
+            const portal = document.getElementById("portal");
+
+            const form = document.getElementById("access-form");
+
+            const pass = document.getElementById("pass");
+
+            const error = document.getElementById("error");
+
+            const toggle = document.getElementById("toggle");
+
+            const exit = document.getElementById("exit");
+
+
+            /* ======================================
+               ABRIR PORTAL
+            ======================================= */
+
+            function enter() {
+
+                gate.hidden = true;
+
+                portal.hidden = false;
+
+                sessionStorage.setItem(
+                    "artdesignPortal",
+                    "ok"
+                );
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "instant"
+                });
+
+            }
+
+
+            /* ======================================
+               SAIR DO PORTAL
+            ======================================= */
+
+            function leave() {
+
+                sessionStorage.removeItem(
+                    "artdesignPortal"
+                );
+
+                portal.hidden = true;
+
+                gate.hidden = false;
+
+                pass.value = "";
+
+                error.textContent = "";
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "instant"
+                });
+
+            }
+
+
+            /* ======================================
+               VALIDAR PALAVRA-CHAVE
+            ======================================= */
+
+            form.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const palavra = pass.value
+                        .trim()
+                        .toLowerCase();
+
+                    if (palavra === "vidanova") {
+
+                        error.textContent = "";
+
+                        enter();
+
+                    } else {
+
+                        error.textContent =
+                            "Palavra-chave incorreta. Confira e tente novamente.";
+
+                        pass.focus();
+
+                    }
+
+                }
+            );
+
+
+            /* ======================================
+               BOTÃO SAIR
+            ======================================= */
+
+            exit.addEventListener(
+                "click",
+                leave
+            );
+
+
+            /* ======================================
+               MOSTRAR / OCULTAR SENHA
+            ======================================= */
+
+            toggle.addEventListener(
+                "click",
+                function () {
+
+                    const mostrar =
+                        pass.type === "password";
+
+                    pass.type = mostrar
+                        ? "text"
+                        : "password";
+
+                    toggle.setAttribute(
+                        "aria-label",
+                        mostrar
+                            ? "Ocultar palavra-chave"
+                            : "Mostrar palavra-chave"
+                    );
+
+                    const icon = toggle.querySelector("i");
+
+                    if (icon) {
+
+                        icon.setAttribute(
+                            "data-lucide",
+                            mostrar ? "eye-off" : "eye"
+                        );
+
+                        if (
+                            window.lucide &&
+                            typeof window.lucide.createIcons === "function"
+                        ) {
+                            window.lucide.createIcons();
+                        }
+
+                    }
+
+                }
+            );
+
+
+            /* ======================================
+               RESTAURAR ACESSO NA SESSÃO
+            ======================================= */
+
+            if (
+                sessionStorage.getItem(
+                    "artdesignPortal"
+                ) === "ok"
+            ) {
+
+                enter();
+
+            }
+
+
+            /* ======================================
+               INICIALIZAR ÍCONES
+            ======================================= */
+
+            function iniciarIcones() {
+
+                if (
+                    window.lucide &&
+                    typeof window.lucide.createIcons === "function"
+                ) {
+
+                    window.lucide.createIcons();
+
+                }
+
+            }
+
+            if (document.readyState === "loading") {
+
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    iniciarIcones
+                );
+
+            } else {
+
+                iniciarIcones();
+
+            }
+
+            window.addEventListener(
+                "load",
+                iniciarIcones
+            );
+
+        })();
+
+    </script>
+
+</body>
+</html>
