@@ -1,458 +1,678 @@
 /* =========================================================
    ARTDESIGN — SCRIPT.JS
-   Animações e interações do site
-   Atualizado para o novo index.html e Portal do Aluno
+   JavaScript principal do site
+
+   Compatível com:
+   - index.html
+   - css/style.css
+
+   Funcionalidades:
+   01. Ícones Lucide
+   02. Menu mobile
+   03. Header dinâmico
+   04. Animações de entrada
+   05. Contadores animados
+   06. Efeito 3D no hero
+   07. Cards flutuantes
+   08. Interações dos serviços
+   09. Rolagem suave
+   10. Animações do Portal do Aluno
+   11. Responsividade
+   12. Rodapé
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+(function () {
+    "use strict";
 
-    /* =====================================================
-       01. ÍCONES LUCIDE
-       ===================================================== */
+    function iniciarArtDesign() {
 
-    if (typeof lucide !== "undefined") {
-        lucide.createIcons();
-    }
+        /* =====================================================
+           01. CONFIGURAÇÕES GERAIS
+           ===================================================== */
+
+        const reduzirMovimento = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        const suportaObserver =
+            "IntersectionObserver" in window;
+
+        const header = document.querySelector(".site-header");
+
+        const menuToggle = document.querySelector(".menu-toggle");
+
+        const mobileNav = document.querySelector(".mobile-nav");
 
 
-    /* =====================================================
-       02. PREFERÊNCIAS DE MOVIMENTO
-       ===================================================== */
+        /* =====================================================
+           02. ÍCONES LUCIDE
+           ===================================================== */
 
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+        function iniciarIcones() {
+
+            if (
+                window.lucide &&
+                typeof window.lucide.createIcons === "function"
+            ) {
+                window.lucide.createIcons();
+            }
+
+        }
+
+        iniciarIcones();
 
 
-    /* =====================================================
-       03. MENU MOBILE
-       ===================================================== */
+        /* =====================================================
+           03. MENU MOBILE
+           ===================================================== */
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mobileNav = document.querySelector(".mobile-nav");
+        function fecharMenu() {
 
-    function closeMobileMenu() {
-        if (!menuToggle || !mobileNav) return;
+            if (!menuToggle || !mobileNav) {
+                return;
+            }
 
-        mobileNav.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-    }
-
-    if (menuToggle && mobileNav) {
-
-        menuToggle.addEventListener("click", () => {
-
-            const isOpen = mobileNav.classList.toggle("active");
+            mobileNav.classList.remove("active");
 
             menuToggle.setAttribute(
                 "aria-expanded",
-                String(isOpen)
+                "false"
             );
 
-        });
+            menuToggle.setAttribute(
+                "aria-label",
+                "Abrir menu"
+            );
 
-        mobileNav.querySelectorAll("a").forEach(link => {
-
-            link.addEventListener("click", closeMobileMenu);
-
-        });
-
-    }
-
-
-    /* =====================================================
-       04. HEADER AO ROLAR A PÁGINA
-       ===================================================== */
-
-    const header = document.querySelector(".site-header");
-
-    function updateHeader() {
-
-        if (!header) return;
-
-        header.classList.toggle(
-            "scrolled",
-            window.scrollY > 40
-        );
-
-    }
-
-    window.addEventListener("scroll", updateHeader, {
-        passive: true
-    });
-
-    updateHeader();
-
-
-    /* =====================================================
-       05. ANIMAÇÕES DE ENTRADA AO ROLAR
-       ===================================================== */
-
-    const revealElements = document.querySelectorAll(".reveal");
-
-    if ("IntersectionObserver" in window) {
-
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
-
-                entries.forEach(entry => {
-
-                    if (!entry.isIntersecting) return;
-
-                    entry.target.classList.add("visible");
-
-                    observer.unobserve(entry.target);
-
-                });
-
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -50px 0px"
-            }
-        );
-
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-
-    } else {
-
-        revealElements.forEach(element => {
-            element.classList.add("visible");
-        });
-
-    }
-
-
-    /* =====================================================
-       06. CONTADORES ANIMADOS
-       ===================================================== */
-
-    const counters = document.querySelectorAll(".counter");
-
-    function animateCounter(counter) {
-
-        const target = Number(
-            counter.getAttribute("data-target")
-        );
-
-        if (!Number.isFinite(target) || target < 0) return;
-
-        if (prefersReducedMotion) {
-
-            counter.textContent = target.toLocaleString("pt-BR");
-
-            return;
         }
 
-        const duration = 1800;
-        const startTime = performance.now();
+        if (menuToggle && mobileNav) {
 
-        function updateCounter(currentTime) {
+            menuToggle.addEventListener("click", function () {
 
-            const elapsed = currentTime - startTime;
+                const aberto =
+                    mobileNav.classList.toggle("active");
 
-            const progress = Math.min(
-                elapsed / duration,
-                1
-            );
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    String(aberto)
+                );
 
-            const eased = 1 - Math.pow(1 - progress, 3);
+                menuToggle.setAttribute(
+                    "aria-label",
+                    aberto ? "Fechar menu" : "Abrir menu"
+                );
 
-            const currentValue = Math.floor(eased * target);
+            });
 
-            counter.textContent = currentValue.toLocaleString(
-                "pt-BR"
-            );
+            mobileNav.querySelectorAll("a").forEach(function (link) {
 
-            if (progress < 1) {
+                link.addEventListener("click", fecharMenu);
 
-                requestAnimationFrame(updateCounter);
+            });
+
+            document.addEventListener("click", function (evento) {
+
+                if (
+                    !mobileNav.contains(evento.target) &&
+                    !menuToggle.contains(evento.target)
+                ) {
+                    fecharMenu();
+                }
+
+            });
+
+            document.addEventListener("keydown", function (evento) {
+
+                if (evento.key === "Escape") {
+                    fecharMenu();
+                }
+
+            });
+
+        }
+
+
+        /* =====================================================
+           04. HEADER DINÂMICO
+           ===================================================== */
+
+        function atualizarHeader() {
+
+            if (!header) {
+                return;
+            }
+
+            if (window.scrollY > 40) {
+
+                header.classList.add("scrolled");
 
             } else {
 
-                counter.textContent = target.toLocaleString(
-                    "pt-BR"
+                header.classList.remove("scrolled");
+
+            }
+
+        }
+
+        atualizarHeader();
+
+        window.addEventListener(
+            "scroll",
+            atualizarHeader,
+            { passive: true }
+        );
+
+
+        /* =====================================================
+           05. ANIMAÇÕES DE ENTRADA
+
+           O CSS utiliza:
+           .reveal
+           .reveal.visible
+
+           Quando o elemento entra na tela, o JS adiciona
+           a classe visible para ativar a animação.
+           ===================================================== */
+
+        const elementosReveal =
+            document.querySelectorAll(".reveal");
+
+        function mostrarElemento(elemento) {
+
+            elemento.classList.add("visible");
+
+        }
+
+        if (reduzirMovimento || !suportaObserver) {
+
+            elementosReveal.forEach(mostrarElemento);
+
+        } else {
+
+            const observerReveal = new IntersectionObserver(
+
+                function (entradas, observer) {
+
+                    entradas.forEach(function (entrada) {
+
+                        if (entrada.isIntersecting) {
+
+                            mostrarElemento(entrada.target);
+
+                            observer.unobserve(entrada.target);
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    root: null,
+                    rootMargin: "0px 0px -35px 0px",
+                    threshold: 0.08
+                }
+
+            );
+
+            elementosReveal.forEach(function (elemento) {
+
+                observerReveal.observe(elemento);
+
+            });
+
+            /*
+             Segurança:
+             Se o navegador restaurar a página em uma
+             posição diferente, os elementos visíveis
+             também serão revelados.
+            */
+
+            function verificarElementosVisiveis() {
+
+                elementosReveal.forEach(function (elemento) {
+
+                    if (elemento.classList.contains("visible")) {
+                        return;
+                    }
+
+                    const rect =
+                        elemento.getBoundingClientRect();
+
+                    const visivel =
+                        rect.top < window.innerHeight - 20 &&
+                        rect.bottom > 0;
+
+                    if (visivel) {
+
+                        mostrarElemento(elemento);
+
+                        observerReveal.unobserve(elemento);
+
+                    }
+
+                });
+
+            }
+
+            window.addEventListener(
+                "load",
+                verificarElementosVisiveis
+            );
+
+            window.addEventListener(
+                "pageshow",
+                verificarElementosVisiveis
+            );
+
+            requestAnimationFrame(function () {
+
+                requestAnimationFrame(
+                    verificarElementosVisiveis
+                );
+
+            });
+
+        }
+
+
+        /* =====================================================
+           06. ANIMAÇÃO DOS CONTADORES
+
+           HTML:
+           <strong class="counter" data-target="1000">0</strong>
+           ===================================================== */
+
+        const contadores =
+            document.querySelectorAll(".counter");
+
+        function animarContador(elemento) {
+
+            if (elemento.dataset.animado === "true") {
+                return;
+            }
+
+            const destino = Number(
+                elemento.getAttribute("data-target")
+            );
+
+            if (!Number.isFinite(destino)) {
+                return;
+            }
+
+            elemento.dataset.animado = "true";
+
+            if (reduzirMovimento) {
+
+                elemento.textContent =
+                    destino.toLocaleString("pt-BR");
+
+                return;
+            }
+
+            const duracao = 1900;
+
+            let inicio = null;
+
+            function atualizarContador(tempoAtual) {
+
+                if (inicio === null) {
+                    inicio = tempoAtual;
+                }
+
+                const tempoDecorrido =
+                    tempoAtual - inicio;
+
+                const progresso = Math.min(
+                    tempoDecorrido / duracao,
+                    1
+                );
+
+                const suavizacao =
+                    1 - Math.pow(1 - progresso, 4);
+
+                const valorAtual = Math.floor(
+                    destino * suavizacao
+                );
+
+                elemento.textContent =
+                    valorAtual.toLocaleString("pt-BR");
+
+                if (progresso < 1) {
+
+                    requestAnimationFrame(
+                        atualizarContador
+                    );
+
+                } else {
+
+                    elemento.textContent =
+                        destino.toLocaleString("pt-BR");
+
+                }
+
+            }
+
+            requestAnimationFrame(atualizarContador);
+
+        }
+
+        if (suportaObserver) {
+
+            const observerContadores =
+                new IntersectionObserver(
+
+                    function (entradas, observer) {
+
+                        entradas.forEach(function (entrada) {
+
+                            if (entrada.isIntersecting) {
+
+                                animarContador(
+                                    entrada.target
+                                );
+
+                                observer.unobserve(
+                                    entrada.target
+                                );
+
+                            }
+
+                        });
+
+                    },
+
+                    {
+                        threshold: 0.3
+                    }
+
+                );
+
+            contadores.forEach(function (contador) {
+
+                observerContadores.observe(contador);
+
+            });
+
+        } else {
+
+            contadores.forEach(animarContador);
+
+        }
+
+
+        /* =====================================================
+           07. EFEITO 3D NO HERO
+
+           Movimento suave da imagem principal
+           acompanhando o mouse.
+
+           O efeito só é ativado em telas desktop.
+           ===================================================== */
+
+        const heroVisual =
+            document.querySelector(".hero-visual");
+
+        const desktop = window.matchMedia(
+            "(min-width: 901px) and (pointer: fine)"
+        );
+
+        if (
+            heroVisual &&
+            !reduzirMovimento &&
+            desktop.matches
+        ) {
+
+            let frameHero = null;
+
+            let rotacaoX = 0;
+            let rotacaoY = 0;
+
+            heroVisual.addEventListener(
+                "mousemove",
+                function (evento) {
+
+                    const rect =
+                        heroVisual.getBoundingClientRect();
+
+                    const centroX = rect.width / 2;
+                    const centroY = rect.height / 2;
+
+                    const posicaoX =
+                        evento.clientX - rect.left;
+
+                    const posicaoY =
+                        evento.clientY - rect.top;
+
+                    rotacaoY =
+                        ((posicaoX - centroX) / centroX) * 2.5;
+
+                    rotacaoX =
+                        ((posicaoY - centroY) / centroY) * -2.5;
+
+                    if (frameHero !== null) {
+                        return;
+                    }
+
+                    frameHero = requestAnimationFrame(
+                        function () {
+
+                            /*
+                             Transform aplicado à imagem interna,
+                             evitando conflito com a animação
+                             .reveal do elemento principal.
+                            */
+
+                            const imagemCard =
+                                heroVisual.querySelector(
+                                    ".hero-image-card"
+                                );
+
+                            if (imagemCard) {
+
+                                imagemCard.style.transform =
+
+                                    "perspective(1200px) " +
+                                    "rotateX(" + rotacaoX + "deg) " +
+                                    "rotateY(" + rotacaoY + "deg)";
+
+                            }
+
+                            frameHero = null;
+
+                        }
+                    );
+
+                }
+            );
+
+            heroVisual.addEventListener(
+                "mouseleave",
+                function () {
+
+                    const imagemCard =
+                        heroVisual.querySelector(
+                            ".hero-image-card"
+                        );
+
+                    if (imagemCard) {
+
+                        imagemCard.style.transform =
+                            "perspective(1200px) " +
+                            "rotateX(0deg) rotateY(0deg)";
+
+                    }
+
+                }
+            );
+
+            const imagemCard =
+                heroVisual.querySelector(
+                    ".hero-image-card"
+                );
+
+            if (imagemCard) {
+
+                imagemCard.style.transition =
+                    "transform 0.55s cubic-bezier(.16,1,.3,1)";
+
+                imagemCard.style.transformStyle =
+                    "preserve-3d";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           08. CARDS FLUTUANTES DO HERO
+
+           O CSS já possui a animação floatingCard.
+
+           Este trecho adiciona movimento sutil ao mouse,
+           sem substituir a animação original.
+           ===================================================== */
+
+        const floatingCards =
+            document.querySelectorAll(
+                ".hero .floating-card"
+            );
+
+        if (
+            floatingCards.length > 0 &&
+            !reduzirMovimento &&
+            desktop.matches
+        ) {
+
+            const hero =
+                document.querySelector(".hero");
+
+            if (hero) {
+
+                let frameFloating = null;
+
+                hero.addEventListener(
+                    "mousemove",
+                    function (evento) {
+
+                        const rect =
+                            hero.getBoundingClientRect();
+
+                        const x =
+                            (evento.clientX - rect.left) /
+                            rect.width - 0.5;
+
+                        const y =
+                            (evento.clientY - rect.top) /
+                            rect.height - 0.5;
+
+                        if (frameFloating !== null) {
+                            return;
+                        }
+
+                        frameFloating = requestAnimationFrame(
+                            function () {
+
+                                floatingCards.forEach(
+                                    function (card, index) {
+
+                                        const intensidade =
+                                            index % 2 === 0
+                                                ? 12
+                                                : -9;
+
+                                        card.style.marginLeft =
+                                            (x * intensidade) + "px";
+
+                                        card.style.marginTop =
+                                            (y * intensidade) + "px";
+
+                                    }
+                                );
+
+                                frameFloating = null;
+
+                            }
+                        );
+
+                    }
+                );
+
+                hero.addEventListener(
+                    "mouseleave",
+                    function () {
+
+                        floatingCards.forEach(
+                            function (card) {
+
+                                card.style.marginLeft = "0px";
+
+                                card.style.marginTop = "0px";
+
+                            }
+                        );
+
+                    }
                 );
 
             }
 
         }
 
-        requestAnimationFrame(updateCounter);
 
-    }
+        /* =====================================================
+           09. INTERAÇÃO DOS CARDS DE SERVIÇO
 
-    if ("IntersectionObserver" in window) {
+           Os cards se movimentam levemente ao passar
+           o mouse e retornam à posição original.
+           ===================================================== */
 
-        const counterObserver = new IntersectionObserver(
-            (entries, observer) => {
+        const cardsServico =
+            document.querySelectorAll(".service-card");
 
-                entries.forEach(entry => {
+        if (
+            !reduzirMovimento &&
+            desktop.matches
+        ) {
 
-                    if (!entry.isIntersecting) return;
+            cardsServico.forEach(function (card) {
 
-                    animateCounter(entry.target);
+                card.addEventListener(
+                    "mousemove",
+                    function (evento) {
 
-                    observer.unobserve(entry.target);
+                        const rect =
+                            card.getBoundingClientRect();
 
-                });
+                        const x =
+                            evento.clientX - rect.left;
 
-            },
-            {
-                threshold: 0.5
-            }
-        );
+                        const y =
+                            evento.clientY - rect.top;
 
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
+                        const rotacaoY =
+                            (x / rect.width - 0.5) * 3;
 
-    } else {
+                        const rotacaoX =
+                            (y / rect.height - 0.5) * -3;
 
-        counters.forEach(animateCounter);
+                        card.style.transform =
 
-    }
+                            "translateY(-8px) " +
+                            "perspective(900px) " +
+                            "rotateX(" + rotacaoX + "deg) " +
+                            "rotateY(" + rotacaoY + "deg)";
 
+                    }
+                );
 
-    /* =====================================================
-       07. PARALLAX SUAVE NO HERO
-       ===================================================== */
+                card.addEventListener(
+                    "mouseleave",
+                    function () {
 
-    const heroVisual = document.querySelector(".hero-visual");
+                        card.style.transform = "";
 
-    if (
-        heroVisual &&
-        !prefersReducedMotion &&
-        window.innerWidth > 900
-    ) {
-
-        heroVisual.addEventListener("mousemove", event => {
-
-            const rect = heroVisual.getBoundingClientRect();
-
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX =
-                ((y - centerY) / centerY) * -2;
-
-            const rotateY =
-                ((x - centerX) / centerX) * 2;
-
-            heroVisual.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(0)
-            `;
-
-        });
-
-        heroVisual.addEventListener("mouseleave", () => {
-
-            heroVisual.style.transform =
-                "perspective(1000px) rotateX(0) rotateY(0)";
-
-        });
-
-    }
-
-
-    /* =====================================================
-       08. MOVIMENTO DOS CARDS FLUTUANTES
-       ===================================================== */
-
-    const floatingCards = document.querySelectorAll(
-        ".hero .floating-card"
-    );
-
-    if (
-        floatingCards.length &&
-        !prefersReducedMotion &&
-        window.innerWidth > 900
-    ) {
-
-        document.addEventListener("mousemove", event => {
-
-            const x =
-                (event.clientX / window.innerWidth) - 0.5;
-
-            const y =
-                (event.clientY / window.innerHeight) - 0.5;
-
-            floatingCards.forEach((card, index) => {
-
-                const intensity = index === 0 ? 8 : -6;
-
-                card.style.marginLeft =
-                    `${x * intensity}px`;
-
-                card.style.marginTop =
-                    `${y * intensity}px`;
-
-            });
-
-        }, {
-            passive: true
-        });
-
-    }
-
-
-    /* =====================================================
-       09. INTERAÇÃO DOS CARDS DE SERVIÇO
-       ===================================================== */
-
-    const serviceCards = document.querySelectorAll(
-        ".service-card"
-    );
-
-    if (
-        !prefersReducedMotion &&
-        window.innerWidth > 900
-    ) {
-
-        serviceCards.forEach(card => {
-
-            card.addEventListener("mousemove", event => {
-
-                const rect = card.getBoundingClientRect();
-
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
-
-                const rotateY =
-                    ((x / rect.width) - 0.5) * 2;
-
-                const rotateX =
-                    ((y / rect.height) - 0.5) * -2;
-
-                card.style.transform = `
-                    translateY(-8px)
-                    perspective(800px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                `;
-
-            });
-
-            card.addEventListener("mouseleave", () => {
-
-                card.style.transform = "";
-
-            });
-
-        });
-
-    }
-
-
-    /* =====================================================
-       10. LINKS INTERNOS COM ROLAGEM SUAVE
-       ===================================================== */
-
-    const internalLinks = document.querySelectorAll(
-        'a[href^="#"]'
-    );
-
-    internalLinks.forEach(link => {
-
-        link.addEventListener("click", event => {
-
-            const targetId = link.getAttribute("href");
-
-            if (!targetId || targetId === "#") return;
-
-            const target = document.getElementById(
-                targetId.substring(1)
-            );
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            const headerHeight = header
-                ? header.offsetHeight + 25
-                : 20;
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                headerHeight;
-
-            window.scrollTo({
-
-                top: targetPosition,
-
-                behavior: prefersReducedMotion
-                    ? "auto"
-                    : "smooth"
-
-            });
-
-        });
-
-    });
-
-
-    /* =====================================================
-       11. PORTAL DO ALUNO
-       Animação da nova seção do index.html
-       ===================================================== */
-
-    const studentPortalCard = document.querySelector(
-        ".student-portal-card"
-    );
-
-    if (studentPortalCard) {
-
-        const portalItems = studentPortalCard.querySelectorAll(
-            ".student-portal-label, " +
-            ".student-portal-copy h2, " +
-            ".student-portal-copy p, " +
-            ".student-portal-button"
-        );
-
-        let portalAnimated = false;
-
-        function animatePortal() {
-
-            if (portalAnimated) return;
-
-            portalAnimated = true;
-
-            if (
-                prefersReducedMotion ||
-                typeof Element.prototype.animate !== "function"
-            ) {
-                return;
-            }
-
-            portalItems.forEach((item, index) => {
-
-                item.animate(
-                    [
-                        {
-                            opacity: 0,
-                            transform: "translateY(24px)",
-                            filter: "blur(4px)"
-                        },
-                        {
-                            opacity: 1,
-                            transform: "translateY(0)",
-                            filter: "blur(0)"
-                        }
-                    ],
-                    {
-                        duration: 850,
-                        delay: index * 130,
-                        easing: "cubic-bezier(.16, 1, .3, 1)",
-                        fill: "both"
                     }
                 );
 
@@ -460,101 +680,333 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        if ("IntersectionObserver" in window) {
 
-            const portalObserver = new IntersectionObserver(
-                (entries, observer) => {
+        /* =====================================================
+           10. ROLAGEM SUAVE DOS LINKS INTERNOS
+           ===================================================== */
 
-                    entries.forEach(entry => {
+        const linksInternos =
+            document.querySelectorAll('a[href^="#"]');
 
-                        if (!entry.isIntersecting) return;
+        linksInternos.forEach(function (link) {
 
-                        animatePortal();
+            link.addEventListener(
+                "click",
+                function (evento) {
 
-                        observer.unobserve(entry.target);
+                    const destino =
+                        link.getAttribute("href");
+
+                    if (
+                        !destino ||
+                        destino === "#"
+                    ) {
+                        return;
+                    }
+
+                    const elementoDestino =
+                        document.getElementById(
+                            destino.substring(1)
+                        );
+
+                    if (!elementoDestino) {
+                        return;
+                    }
+
+                    evento.preventDefault();
+
+                    const alturaHeader =
+                        header
+                            ? header.offsetHeight + 25
+                            : 20;
+
+                    const posicao =
+                        elementoDestino
+                            .getBoundingClientRect().top +
+                        window.scrollY -
+                        alturaHeader;
+
+                    window.scrollTo({
+
+                        top: Math.max(0, posicao),
+
+                        behavior: reduzirMovimento
+                            ? "auto"
+                            : "smooth"
 
                     });
 
-                },
-                {
-                    threshold: 0.15
+                    fecharMenu();
+
                 }
             );
 
-            portalObserver.observe(studentPortalCard);
+        });
 
-        } else {
 
-            animatePortal();
+        /* =====================================================
+           11. ANIMAÇÃO DO PORTAL DO ALUNO NA HOME
+
+           Funciona somente se a seção existir.
+
+           Não interfere na página workshop.html.
+           ===================================================== */
+
+        const portalCard =
+            document.querySelector(
+                ".student-portal-card"
+            );
+
+        if (portalCard) {
+
+            const elementosPortal =
+                portalCard.querySelectorAll(
+
+                    ".student-portal-label, " +
+                    ".student-portal-copy h2, " +
+                    ".student-portal-copy p, " +
+                    ".student-portal-button"
+
+                );
+
+            let portalJaAnimado = false;
+
+            function animarPortal() {
+
+                if (portalJaAnimado) {
+                    return;
+                }
+
+                portalJaAnimado = true;
+
+                if (
+                    reduzirMovimento ||
+                    typeof Element.prototype.animate !==
+                        "function"
+                ) {
+                    return;
+                }
+
+                elementosPortal.forEach(
+                    function (elemento, indice) {
+
+                        elemento.animate(
+
+                            [
+                                {
+                                    opacity: 0,
+                                    transform: "translateY(24px)",
+                                    filter: "blur(4px)"
+                                },
+
+                                {
+                                    opacity: 1,
+                                    transform: "translateY(0)",
+                                    filter: "blur(0)"
+                                }
+                            ],
+
+                            {
+                                duration: 850,
+                                delay: indice * 130,
+                                easing:
+                                    "cubic-bezier(.16,1,.3,1)",
+                                fill: "both"
+                            }
+
+                        );
+
+                    }
+                );
+
+            }
+
+            if (suportaObserver) {
+
+                const observerPortal =
+                    new IntersectionObserver(
+
+                        function (entradas, observer) {
+
+                            entradas.forEach(
+                                function (entrada) {
+
+                                    if (entrada.isIntersecting) {
+
+                                        animarPortal();
+
+                                        observer.unobserve(
+                                            entrada.target
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        },
+
+                        {
+                            threshold: 0.15
+                        }
+
+                    );
+
+                observerPortal.observe(portalCard);
+
+            } else {
+
+                animarPortal();
+
+            }
 
         }
 
-    }
 
+        /* =====================================================
+           12. RESPONSIVIDADE
+           ===================================================== */
 
-    /* =====================================================
-       12. FECHAR MENU AO REDIMENSIONAR
-       ===================================================== */
+        window.addEventListener(
+            "resize",
+            function () {
 
-    window.addEventListener("resize", () => {
+                if (window.innerWidth > 760) {
 
-        if (window.innerWidth > 760) {
-            closeMobileMenu();
-        }
+                    fecharMenu();
 
-    });
+                }
 
-
-    /* =====================================================
-       13. ANO AUTOMÁTICO DO RODAPÉ
-       ===================================================== */
-
-    const footer = document.querySelector(".site-footer");
-
-    if (footer) {
-
-        const footerText = footer.querySelector(
-            ".footer-bottom span"
+            }
         );
 
-        if (footerText) {
 
-            footerText.textContent =
-                `© ${new Date().getFullYear()} ArtDesign. Todos os direitos reservados.`;
+        /* =====================================================
+           13. RODAPÉ
+
+           Atualiza somente o ano, preservando o
+           restante do texto e a estrutura original.
+           ===================================================== */
+
+        const footerBottom =
+            document.querySelector(
+                ".site-footer .footer-bottom"
+            );
+
+        if (footerBottom) {
+
+            const primeiroSpan =
+                footerBottom.querySelector("span");
+
+            if (primeiroSpan) {
+
+                primeiroSpan.textContent =
+                    "© " +
+                    new Date().getFullYear() +
+                    " ArtDesign. Todos os direitos reservados.";
+
+            }
 
         }
 
+
+        /* =====================================================
+           14. ANIMAÇÃO INICIAL DO HERO
+           ===================================================== */
+
+        const heroContent =
+            document.querySelector(".hero-content");
+
+        if (heroContent) {
+
+            requestAnimationFrame(function () {
+
+                heroContent.classList.add(
+                    "hero-loaded"
+                );
+
+            });
+
+        }
+
+
+        /* =====================================================
+           15. VERIFICAÇÃO FINAL
+
+           Garante que elementos inicialmente ocultos
+           não permaneçam invisíveis caso o observer
+           não consiga executar.
+           ===================================================== */
+
+        function verificarReveals() {
+
+            document.querySelectorAll(
+                ".reveal:not(.visible)"
+            ).forEach(function (elemento) {
+
+                const rect =
+                    elemento.getBoundingClientRect();
+
+                if (
+                    rect.top < window.innerHeight &&
+                    rect.bottom > 0
+                ) {
+
+                    elemento.classList.add("visible");
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener(
+            "pageshow",
+            verificarReveals
+        );
+
+        window.addEventListener(
+            "load",
+            verificarReveals
+        );
+
+        window.addEventListener(
+            "scroll",
+            verificarReveals,
+            { passive: true }
+        );
+
+
+        /* =====================================================
+           16. INICIALIZAÇÃO CONCLUÍDA
+           ===================================================== */
+
+        console.log(
+            "ArtDesign: JavaScript inicializado com sucesso."
+        );
+
     }
 
 
-    /* =====================================================
-       14. ANIMAÇÃO INICIAL DO HERO
-       ===================================================== */
+    /* =========================================================
+       INICIALIZAÇÃO SEGURA
 
-    const heroContent = document.querySelector(
-        ".hero-content"
-    );
+       Funciona mesmo quando o script é carregado
+       depois que o HTML já terminou de carregar.
+       ========================================================= */
 
-    if (
-        heroContent &&
-        !prefersReducedMotion
-    ) {
+    if (document.readyState === "loading") {
 
-        setTimeout(() => {
+        document.addEventListener(
+            "DOMContentLoaded",
+            iniciarArtDesign,
+            { once: true }
+        );
 
-            heroContent.classList.add("hero-loaded");
+    } else {
 
-        }, 100);
+        iniciarArtDesign();
 
     }
 
-
-    /* =====================================================
-       15. FINALIZAÇÃO
-       ===================================================== */
-
-    console.log(
-        "ArtDesign — site carregado com sucesso."
-    );
-
-});
+})();
