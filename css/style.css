@@ -194,7 +194,7 @@ a {
 
 .brand img {
     width: auto;
-    height: 90px;
+    height: 56px;
     max-width: 150px;
     object-fit: contain;
 }
@@ -1867,7 +1867,7 @@ a {
     }
 
     .brand img {
-        height: 90px;
+        height: 48px;
         max-width: 125px;
     }
 
@@ -2150,7 +2150,7 @@ a {
     }
 
     .intro-heading h2,
-    .section-header h2,
+    .section-header h2 { font-size: 34px; }
 }
 
 
@@ -2183,14 +2183,17 @@ a {
    PORTAL DO ALUNO — CHAMADA NA HOME (sem alterar seções existentes)
    ========================================================= */
 .student-portal-section { background: var(--off-white); }
-.student-portal-card { position:relative; overflow:hidden; border-radius:34px; padding:clamp(35px,6vw,72px); background:linear-gradient(125deg,#07111c,#102d45); color:#fff; display:flex; justify-content:space-between; align-items:center; gap:36px; box-shadow:var(--shadow-dark); }
-.student-portal-card::after {content:"";position:absolute;right:-110px;top:-140px;width:390px;height:390px;border-radius:50%;border:1px solid rgba(201,164,92,.28);pointer-events:none;}
+.student-portal-card { position:relative; overflow:hidden; border-radius:34px; padding:clamp(35px,6vw,72px); background:linear-gradient(125deg,#0e1971,#19246e); color:#fff; display:flex; justify-content:space-between; align-items:center; gap:36px; box-shadow:var(--shadow-dark); }
+.student-portal-card::after {content:"";position:absolute;right:-110px;top:-140px;width:390px;height:390px;border-radius:50%;border:1px solid rgba(233,224,210,.28);pointer-events:none;}
 .student-portal-copy {position:relative;z-index:1;max-width:690px;}
-.student-portal-label {display:inline-flex;gap:9px;align-items:center;font-size:11px;letter-spacing:.13em;font-weight:800;text-transform:uppercase;color:#e4c681;margin-bottom:19px;}
+.student-portal-label {display:inline-flex;gap:9px;align-items:center;font-size:11px;letter-spacing:.13em;font-weight:800;text-transform:uppercase;color:var(--beige);margin-bottom:19px;}
 .student-portal-copy h2 {font-family:Manrope,sans-serif;font-size:clamp(33px,4.4vw,54px);line-height:1.1;letter-spacing:-.045em;}
-.student-portal-copy h2 span {color:#e4c681;}
+.student-portal-copy h2 span {color:var(--beige);}
 .student-portal-copy p {color:rgba(255,255,255,.72);margin-top:19px;max-width:570px;font-size:15px;line-height:1.75;}
-.student-portal-button {position:relative;z-index:1;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:17px 24px;border-radius:14px;background:#c9a45c;color:#07111c;font-weight:800;font-size:14px;transition:transform .3s,background .3s;}
-.student-portal-button:hover {transform:translateY(-3px);background:#e4c681;}
+.student-portal-button {position:relative;z-index:1;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:17px 24px;border-radius:14px;background:var(--beige);color:var(--navy);font-weight:800;font-size:14px;transition:transform .3s,background .3s;}
+.student-portal-button:hover {transform:translateY(-3px);background:var(--white);}
 .student-portal-button svg {width:18px;height:18px;}
 @media(max-width:760px){.student-portal-card{flex-direction:column;align-items:stretch;border-radius:25px}.student-portal-button{width:100%;}}
+
+/* A logo permanece visível e centralizada no cabeçalho, sem ultrapassar a barra. */
+.brand img { display:block; object-fit:contain; }
