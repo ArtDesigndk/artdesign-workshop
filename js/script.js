@@ -1,23 +1,13 @@
 /* =========================================================
    ARTDESIGN — SCRIPT.JS
-   Interações e animações do site
-   ========================================================= */
-
-
-/* =========================================================
-   01. ESPERA O HTML CARREGAR
+   Animações e interações do site
+   Atualizado para o novo index.html e Portal do Aluno
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
     /* =====================================================
-       02. ATUALIZA OS ÍCONES LUCIDE
-
-       O HTML utiliza:
-       <i data-lucide="instagram"></i>
-
-       O Lucide transforma esses elementos em SVG.
+       01. ÍCONES LUCIDE
        ===================================================== */
 
     if (typeof lucide !== "undefined") {
@@ -25,20 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    /* =====================================================
+       02. PREFERÊNCIAS DE MOVIMENTO
+       ===================================================== */
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
 
     /* =====================================================
        03. MENU MOBILE
-
-       No celular o menu principal fica escondido.
-       Ao clicar no botão, adicionamos a classe "active"
-       ao menu.
-
-       O CSS é responsável por mostrar o menu.
        ===================================================== */
 
     const menuToggle = document.querySelector(".menu-toggle");
     const mobileNav = document.querySelector(".mobile-nav");
 
+    function closeMobileMenu() {
+        if (!menuToggle || !mobileNav) return;
+
+        mobileNav.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+    }
 
     if (menuToggle && mobileNav) {
 
@@ -46,281 +44,158 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const isOpen = mobileNav.classList.toggle("active");
 
-            /* Atualiza acessibilidade do botão */
             menuToggle.setAttribute(
                 "aria-expanded",
-                isOpen
+                String(isOpen)
             );
 
         });
 
+        mobileNav.querySelectorAll("a").forEach(link => {
 
-        /* ---------------------------------------------
-           Fecha o menu quando o usuário clica em um link
-           --------------------------------------------- */
-
-        const mobileLinks =
-            mobileNav.querySelectorAll("a");
-
-
-        mobileLinks.forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                mobileNav.classList.remove("active");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            });
+            link.addEventListener("click", closeMobileMenu);
 
         });
 
     }
 
 
-
     /* =====================================================
        04. HEADER AO ROLAR A PÁGINA
-
-       Quando o usuário começa a rolar:
-       .scrolled
-
-       é adicionada ao header.
-
-       Isso permite que o CSS deixe o menu mais compacto
-       e com uma sombra maior.
        ===================================================== */
 
-    const header =
-        document.querySelector(".site-header");
-
+    const header = document.querySelector(".site-header");
 
     function updateHeader() {
 
         if (!header) return;
 
-
-        if (window.scrollY > 40) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
+        header.classList.toggle(
+            "scrolled",
+            window.scrollY > 40
+        );
 
     }
 
+    window.addEventListener("scroll", updateHeader, {
+        passive: true
+    });
 
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-    );
-
-
-    /* Executa uma vez ao carregar */
     updateHeader();
 
 
-
     /* =====================================================
-       05. REVEAL — ELEMENTOS APARECENDO NO SCROLL
-
-       Todos os elementos com:
-
-       class="reveal"
-
-       começam invisíveis no CSS.
-
-       Quando entram na tela, recebem:
-
-       class="visible"
-
-       O CSS faz a animação.
+       05. ANIMAÇÕES DE ENTRADA AO ROLAR
        ===================================================== */
 
-    const revealElements =
-        document.querySelectorAll(".reveal");
+    const revealElements = document.querySelectorAll(".reveal");
 
+    if ("IntersectionObserver" in window) {
 
-    const revealObserver =
-        new IntersectionObserver(
+        const revealObserver = new IntersectionObserver(
             (entries, observer) => {
 
                 entries.forEach(entry => {
 
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
+                    if (!entry.isIntersecting) return;
 
                     entry.target.classList.add("visible");
 
-
-                    /*
-                     * Depois que o elemento apareceu,
-                     * não precisamos continuar observando.
-                     */
-
-                    observer.unobserve(
-                        entry.target
-                    );
+                    observer.unobserve(entry.target);
 
                 });
 
             },
             {
                 threshold: 0.12,
-
-                rootMargin:
-                    "0px 0px -50px 0px"
+                rootMargin: "0px 0px -50px 0px"
             }
         );
 
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
 
-    revealElements.forEach(element => {
+    } else {
 
-        revealObserver.observe(element);
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
 
-    });
-
+    }
 
 
     /* =====================================================
-       06. CONTADORES
-
-       Os números da seção de experiência utilizam:
-
-       data-target="1000"
-
-       O JavaScript transforma:
-
-       0 → 100 → 500 → 1000
-
-       de maneira animada.
+       06. CONTADORES ANIMADOS
        ===================================================== */
 
-    const counters =
-        document.querySelectorAll(".counter");
-
+    const counters = document.querySelectorAll(".counter");
 
     function animateCounter(counter) {
 
-        const target =
-            Number(
-                counter.getAttribute("data-target")
-            );
+        const target = Number(
+            counter.getAttribute("data-target")
+        );
 
+        if (!Number.isFinite(target) || target < 0) return;
 
-        if (!target) return;
+        if (prefersReducedMotion) {
 
+            counter.textContent = target.toLocaleString("pt-BR");
+
+            return;
+        }
 
         const duration = 1800;
-
-        const startTime =
-            performance.now();
-
+        const startTime = performance.now();
 
         function updateCounter(currentTime) {
 
-            const elapsed =
-                currentTime - startTime;
+            const elapsed = currentTime - startTime;
 
+            const progress = Math.min(
+                elapsed / duration,
+                1
+            );
 
-            const progress =
-                Math.min(
-                    elapsed / duration,
-                    1
-                );
+            const eased = 1 - Math.pow(1 - progress, 3);
 
+            const currentValue = Math.floor(eased * target);
 
-            /*
-             * Easing:
-             * começa rápido e termina suavemente.
-             */
-
-            const eased =
-                1 - Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            const currentValue =
-                Math.floor(
-                    eased * target
-                );
-
-
-            /*
-             * Formata números maiores:
-             *
-             * 1000 → 1.000
-             */
-
-            counter.textContent =
-                currentValue.toLocaleString(
-                    "pt-BR"
-                );
-
+            counter.textContent = currentValue.toLocaleString(
+                "pt-BR"
+            );
 
             if (progress < 1) {
 
-                requestAnimationFrame(
-                    updateCounter
-                );
+                requestAnimationFrame(updateCounter);
 
             } else {
 
-                counter.textContent =
-                    target.toLocaleString(
-                        "pt-BR"
-                    );
+                counter.textContent = target.toLocaleString(
+                    "pt-BR"
+                );
 
             }
 
         }
 
-
-        requestAnimationFrame(
-            updateCounter
-        );
+        requestAnimationFrame(updateCounter);
 
     }
 
+    if ("IntersectionObserver" in window) {
 
-
-    /* =====================================================
-       OBSERVADOR DOS CONTADORES
-
-       O contador só começa quando o bloco entra
-       na tela do usuário.
-       ===================================================== */
-
-    const counterObserver =
-        new IntersectionObserver(
+        const counterObserver = new IntersectionObserver(
             (entries, observer) => {
 
                 entries.forEach(entry => {
 
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+                    if (!entry.isIntersecting) return;
 
+                    animateCounter(entry.target);
 
-                    animateCounter(
-                        entry.target
-                    );
-
-
-                    observer.unobserve(
-                        entry.target
-                    );
+                    observer.unobserve(entry.target);
 
                 });
 
@@ -330,33 +205,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
 
-    counters.forEach(counter => {
+    } else {
 
-        counterObserver.observe(counter);
+        counters.forEach(animateCounter);
 
-    });
-
+    }
 
 
     /* =====================================================
        07. PARALLAX SUAVE NO HERO
-
-       O movimento acompanha discretamente o mouse.
-
-       Não exageramos no efeito para não deixar o site
-       com aparência de template antigo.
        ===================================================== */
 
-    const heroVisual =
-        document.querySelector(".hero-visual");
-
-
-    const prefersReducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
+    const heroVisual = document.querySelector(".hero-visual");
 
     if (
         heroVisual &&
@@ -364,82 +228,48 @@ document.addEventListener("DOMContentLoaded", () => {
         window.innerWidth > 900
     ) {
 
-        heroVisual.addEventListener(
-            "mousemove",
-            event => {
+        heroVisual.addEventListener("mousemove", event => {
 
-                const rect =
-                    heroVisual.getBoundingClientRect();
+            const rect = heroVisual.getBoundingClientRect();
 
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
 
-                const x =
-                    event.clientX - rect.left;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
 
+            const rotateX =
+                ((y - centerY) / centerY) * -2;
 
-                const y =
-                    event.clientY - rect.top;
+            const rotateY =
+                ((x - centerX) / centerX) * 2;
 
+            heroVisual.style.transform = `
+                perspective(1000px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                translateY(0)
+            `;
 
-                const centerX =
-                    rect.width / 2;
+        });
 
+        heroVisual.addEventListener("mouseleave", () => {
 
-                const centerY =
-                    rect.height / 2;
+            heroVisual.style.transform =
+                "perspective(1000px) rotateX(0) rotateY(0)";
 
-
-                const rotateX =
-                    (y - centerY) /
-                    centerY *
-                    -2;
-
-
-                const rotateY =
-                    (x - centerX) /
-                    centerX *
-                    2;
-
-
-                heroVisual.style.transform =
-                    `
-                    perspective(1000px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    translateY(0)
-                    `;
-
-            }
-        );
-
-
-        heroVisual.addEventListener(
-            "mouseleave",
-            () => {
-
-                heroVisual.style.transform =
-                    "perspective(1000px) rotateX(0) rotateY(0)";
-
-            }
-        );
+        });
 
     }
 
 
-
     /* =====================================================
-       08. EFEITO DE MOVIMENTO DOS CARDS FLUTUANTES
-
-       Os cards recebem uma pequena variação de posição
-       conforme o mouse se movimenta no hero.
-
-       O CSS continua responsável pela animação principal.
+       08. MOVIMENTO DOS CARDS FLUTUANTES
        ===================================================== */
 
-    const floatingCards =
-        document.querySelectorAll(
-            ".hero .floating-card"
-        );
-
+    const floatingCards = document.querySelectorAll(
+        ".hero .floating-card"
+    );
 
     if (
         floatingCards.length &&
@@ -447,61 +277,40 @@ document.addEventListener("DOMContentLoaded", () => {
         window.innerWidth > 900
     ) {
 
-        document.addEventListener(
-            "mousemove",
-            event => {
+        document.addEventListener("mousemove", event => {
 
-                const x =
-                    (event.clientX /
-                        window.innerWidth) - 0.5;
+            const x =
+                (event.clientX / window.innerWidth) - 0.5;
 
+            const y =
+                (event.clientY / window.innerHeight) - 0.5;
 
-                const y =
-                    (event.clientY /
-                        window.innerHeight) - 0.5;
+            floatingCards.forEach((card, index) => {
 
+                const intensity = index === 0 ? 8 : -6;
 
-                floatingCards.forEach(
-                    (card, index) => {
+                card.style.marginLeft =
+                    `${x * intensity}px`;
 
-                        const intensity =
-                            index === 0
-                                ? 8
-                                : -6;
+                card.style.marginTop =
+                    `${y * intensity}px`;
 
+            });
 
-                        card.style.marginLeft =
-                            `${x * intensity}px`;
-
-
-                        card.style.marginTop =
-                            `${y * intensity}px`;
-
-                    }
-                );
-
-            },
-            { passive: true }
-        );
+        }, {
+            passive: true
+        });
 
     }
 
 
-
     /* =====================================================
-       09. HOVER DOS CARDS DE SERVIÇO
-
-       Adiciona uma pequena interação baseada no mouse.
-
-       O CSS já possui o efeito principal.
-       Aqui criamos apenas um movimento sutil.
+       09. INTERAÇÃO DOS CARDS DE SERVIÇO
        ===================================================== */
 
-    const serviceCards =
-        document.querySelectorAll(
-            ".service-card"
-        );
-
+    const serviceCards = document.querySelectorAll(
+        ".service-card"
+    );
 
     if (
         !prefersReducedMotion &&
@@ -510,197 +319,203 @@ document.addEventListener("DOMContentLoaded", () => {
 
         serviceCards.forEach(card => {
 
-            card.addEventListener(
-                "mousemove",
-                event => {
+            card.addEventListener("mousemove", event => {
 
-                    const rect =
-                        card.getBoundingClientRect();
+                const rect = card.getBoundingClientRect();
 
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
 
-                    const x =
-                        event.clientX - rect.left;
+                const rotateY =
+                    ((x / rect.width) - 0.5) * 2;
 
+                const rotateX =
+                    ((y / rect.height) - 0.5) * -2;
 
-                    const y =
-                        event.clientY - rect.top;
+                card.style.transform = `
+                    translateY(-8px)
+                    perspective(800px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                `;
 
+            });
 
-                    const rotateY =
-                        ((x / rect.width) - 0.5) * 2;
+            card.addEventListener("mouseleave", () => {
 
+                card.style.transform = "";
 
-                    const rotateX =
-                        ((y / rect.height) - 0.5) * -2;
-
-
-                    card.style.transform =
-                        `
-                        translateY(-8px)
-                        perspective(800px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        `;
-
-                }
-            );
-
-
-            card.addEventListener(
-                "mouseleave",
-                () => {
-
-                    card.style.transform = "";
-
-                }
-            );
+            });
 
         });
 
     }
 
 
-
     /* =====================================================
-       10. LINKS INTERNOS COM SCROLL SUAVE
-
-       Quando um link aponta para:
-
-       #servicos
-       #projetos
-       #contato
-
-       fazemos uma rolagem suave.
-
-       Isso também funciona em navegadores que não
-       respeitam totalmente o scroll-behavior do CSS.
+       10. LINKS INTERNOS COM ROLAGEM SUAVE
        ===================================================== */
 
-    const internalLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
-
+    const internalLinks = document.querySelectorAll(
+        'a[href^="#"]'
+    );
 
     internalLinks.forEach(link => {
 
-        link.addEventListener(
-            "click",
-            event => {
+        link.addEventListener("click", event => {
 
-                const targetId =
-                    link.getAttribute("href");
+            const targetId = link.getAttribute("href");
 
+            if (!targetId || targetId === "#") return;
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
+            const target = document.getElementById(
+                targetId.substring(1)
+            );
 
+            if (!target) return;
 
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
+            event.preventDefault();
 
+            const headerHeight = header
+                ? header.offsetHeight + 25
+                : 20;
 
-                if (!target) {
-                    return;
-                }
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                headerHeight;
 
+            window.scrollTo({
 
-                event.preventDefault();
+                top: targetPosition,
 
+                behavior: prefersReducedMotion
+                    ? "auto"
+                    : "smooth"
 
-                const headerHeight =
-                    header
-                        ? header.offsetHeight + 25
-                        : 20;
+            });
 
-
-                const targetPosition =
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    headerHeight;
-
-
-                window.scrollTo({
-
-                    top: targetPosition,
-
-                    behavior:
-                        prefersReducedMotion
-                            ? "auto"
-                            : "smooth"
-
-                });
-
-            }
-        );
+        });
 
     });
 
 
-
     /* =====================================================
-       11. FECHAR MENU AO REDIMENSIONAR
-
-       Se o usuário estiver no celular e aumentar a janela
-       para desktop, fechamos o menu mobile.
+       11. PORTAL DO ALUNO
+       Animação da nova seção do index.html
        ===================================================== */
 
-    window.addEventListener(
-        "resize",
-        () => {
-
-            if (
-                window.innerWidth > 760 &&
-                mobileNav
-            ) {
-
-                mobileNav.classList.remove(
-                    "active"
-                );
-
-
-                if (menuToggle) {
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-
-        }
+    const studentPortalCard = document.querySelector(
+        ".student-portal-card"
     );
 
+    if (studentPortalCard) {
+
+        const portalItems = studentPortalCard.querySelectorAll(
+            ".student-portal-label, " +
+            ".student-portal-copy h2, " +
+            ".student-portal-copy p, " +
+            ".student-portal-button"
+        );
+
+        let portalAnimated = false;
+
+        function animatePortal() {
+
+            if (portalAnimated) return;
+
+            portalAnimated = true;
+
+            if (
+                prefersReducedMotion ||
+                typeof Element.prototype.animate !== "function"
+            ) {
+                return;
+            }
+
+            portalItems.forEach((item, index) => {
+
+                item.animate(
+                    [
+                        {
+                            opacity: 0,
+                            transform: "translateY(24px)",
+                            filter: "blur(4px)"
+                        },
+                        {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                            filter: "blur(0)"
+                        }
+                    ],
+                    {
+                        duration: 850,
+                        delay: index * 130,
+                        easing: "cubic-bezier(.16, 1, .3, 1)",
+                        fill: "both"
+                    }
+                );
+
+            });
+
+        }
+
+        if ("IntersectionObserver" in window) {
+
+            const portalObserver = new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach(entry => {
+
+                        if (!entry.isIntersecting) return;
+
+                        animatePortal();
+
+                        observer.unobserve(entry.target);
+
+                    });
+
+                },
+                {
+                    threshold: 0.15
+                }
+            );
+
+            portalObserver.observe(studentPortalCard);
+
+        } else {
+
+            animatePortal();
+
+        }
+
+    }
 
 
     /* =====================================================
-       12. ANO AUTOMÁTICO DO FOOTER
-
-       Se futuramente você quiser evitar alterar
-       manualmente o ano do rodapé, podemos procurar
-       o texto e atualizar automaticamente.
-
-       O HTML atual possui 2026, então esta função
-       mantém o ano atualizado.
+       12. FECHAR MENU AO REDIMENSIONAR
        ===================================================== */
 
-    const footer =
-        document.querySelector(".site-footer");
+    window.addEventListener("resize", () => {
 
+        if (window.innerWidth > 760) {
+            closeMobileMenu();
+        }
+
+    });
+
+
+    /* =====================================================
+       13. ANO AUTOMÁTICO DO RODAPÉ
+       ===================================================== */
+
+    const footer = document.querySelector(".site-footer");
 
     if (footer) {
 
-        const footerText =
-            footer.querySelector(".footer-bottom span");
-
+        const footerText = footer.querySelector(
+            ".footer-bottom span"
+        );
 
         if (footerText) {
 
@@ -712,19 +527,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
     /* =====================================================
-       13. ANIMAÇÃO DE ENTRADA DA PÁGINA
-
-       Pequeno efeito inicial no conteúdo principal.
-
-       Não usamos uma animação exagerada para evitar
-       sensação de site antigo/template.
+       14. ANIMAÇÃO INICIAL DO HERO
        ===================================================== */
 
-    const heroContent =
-        document.querySelector(".hero-content");
-
+    const heroContent = document.querySelector(
+        ".hero-content"
+    );
 
     if (
         heroContent &&
@@ -733,25 +542,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
 
-            heroContent.classList.add(
-                "hero-loaded"
-            );
+            heroContent.classList.add("hero-loaded");
 
         }, 100);
 
     }
 
 
-
     /* =====================================================
-       14. LOG NO CONSOLE
-
-       Útil enquanto você está aprendendo.
-
-       Quando abrir:
-       Chrome/Safari → Inspecionar → Console
-
-       verá que o site foi carregado.
+       15. FINALIZAÇÃO
        ===================================================== */
 
     console.log(
