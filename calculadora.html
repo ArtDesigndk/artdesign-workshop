@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#0e1971">
+    <title>Calculadora Simples | ArtDesign</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0e1971;
+            --dark: #080e35;
+            --beige: #e9e0d2;
+            --gold: #d7b46a;
+            --gold-bright: #f0d596;
+            --muted: #cdd2e6;
+            --line: rgba(233, 224, 210, .18)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(ellipse at 90% 0%, #303b91 0%, transparent 38%), linear-gradient(140deg, #0e1971, #11185b);
+            color: white;
+            font: 15px/1.55 'DM Sans', sans-serif;
+            min-height: 100vh
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Manrope, sans-serif;
+            letter-spacing: -.04em
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            width: min(820px, calc(100% - 32px));
+            margin: auto
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            min-height: 90px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        header img {
+            height: 58px;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain
+        }
+
+        header a:last-child {
+            font-size: 12px;
+            color: var(--beige);
+            font-weight: 700
+        }
+
+        main {
+            padding: 36px 0 65px
+        }
+
+        .kicker {
+            font-size: 11px;
+            letter-spacing: .16em;
+            color: var(--beige);
+            font-weight: 800;
+            text-transform: uppercase
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.13;
+            margin: 12px 0
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin: 0 0 28px
+        }
+
+        .panel {
+            background: linear-gradient(145deg, #080e35, #050a26);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 25px;
+            margin: 18px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .12)
+        }
+
+        .heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 18px
+        }
+
+        .number {
+            display: grid;
+            place-items: center;
+            background: var(--beige);
+            color: var(--navy);
+            font-weight: 800;
+            width: 34px;
+            height: 34px;
+            border-radius: 11px;
+            flex-shrink: 0
+        }
+
+        .heading h2 {
+            font-size: 19px;
+            margin: 0
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin: -9px 0 18px
+        }
+
+        .fields {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.3fr;
+            gap: 12px
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .field label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #f5f2ec
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid rgba(255, 255, 255, .19);
+            border-radius: 11px;
+            background: #141d50;
+            color: #fff;
+            padding: 13px 12px;
+            font: inherit;
+            outline: none
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--beige);
+            box-shadow: 0 0 0 3px rgba(233, 224, 210, .12)
+        }
+
+        input::placeholder {
+            color: #a6abc6
+        }
+
+        .field select option {
+            background: #141d50
+        }
+
+        .items {
+            display: grid;
+            gap: 14px
+        }
+
+        .item {
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 14px;
+            padding: 14px;
+            background: rgba(255, 255, 255, .035)
+        }
+
+        .item-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 9px
+        }
+
+        .text-btn {
+            border: 0;
+            background: none;
+            color: var(--beige);
+            font: 700 12px 'DM Sans', sans-serif;
+            cursor: pointer;
+            padding: 5px
+        }
+
+        .add {
+            border: 1px dashed rgba(233, 224, 210, .5);
+            background: transparent;
+            color: var(--beige);
+            padding: 13px 16px;
+            border-radius: 12px;
+            font: 700 13px 'DM Sans', sans-serif;
+            cursor: pointer;
+            margin-top: 13px;
+            width: 100%
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .optional {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 13px
+        }
+
+        .optional input {
+            accent-color: var(--beige)
+        }
+
+        .extra {
+            margin-top: 15px
+        }
+
+        .result {
+            background: linear-gradient(140deg, #e9e0d2, #f6f1e9);
+            color: #0e1971;
+            border-radius: 22px;
+            padding: 27px;
+            margin-top: 22px
+        }
+
+        .result h2 {
+            margin: 0 0 8px;
+            font-size: 20px
+        }
+
+        .total {
+            font: 800 clamp(35px, 7vw, 54px)/1.2 Manrope, sans-serif;
+            letter-spacing: -.05em;
+            margin: 12px 0 18px;
+            overflow-wrap: anywhere
+        }
+
+        .breakdown {
+            border-top: 1px solid rgba(14, 25, 113, .17);
+            padding-top: 12px
+        }
+
+        .line {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+            padding: 5px 0
+        }
+
+        .line strong {
+            white-space: nowrap
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 19px
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font: 800 13px 'DM Sans', sans-serif;
+            cursor: pointer
+        }
+
+        .btn.main {
+            background: #0e1971;
+            color: white
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #0e1971;
+            border: 1px solid rgba(14, 25, 113, .3)
+        }
+
+        .notice {
+            font-size: 12px;
+            color: #4c547e;
+            margin-top: 14px
+        }
+
+        .toast {
+            min-height: 20px;
+            font-size: 12px;
+            margin-top: 8px
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0 32px;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        @media(max-width:600px) {
+            header img {
+                height: 48px
+            }
+
+            .panel {
+                padding: 18px;
+                border-radius: 18px
+            }
+
+            .fields {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .fields .field:first-child {
+                grid-column: 1/-1
+            }
+
+            .two {
+                grid-template-columns: 1fr
+            }
+
+            .result {
+                padding: 21px
+            }
+
+            .actions .btn {
+                width: 100%
+            }
+
+            main {
+                padding-top: 28px
+            }
+        }
+
+        /* Detalhes dourados discretos */
+        .kicker {
+            color: var(--gold-bright)
+        }
+
+        .number {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+            color: #101741;
+            box-shadow: 0 4px 15px rgba(215, 180, 106, .18)
+        }
+
+        .panel {
+            border-color: rgba(215, 180, 106, .25)
+        }
+
+        .heading h2 {
+            color: #fff
+        }
+
+        .heading::after {
+            content: "";
+            height: 2px;
+            width: 24px;
+            background: var(--gold);
+            border-radius: 3px;
+            margin-left: auto;
+            opacity: .9
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(215, 180, 106, .14)
+        }
+
+        .add {
+            color: var(--gold-bright);
+            border-color: rgba(215, 180, 106, .65)
+        }
+
+        .add:hover {
+            background: rgba(215, 180, 106, .08)
+        }
+
+        .text-btn {
+            color: var(--gold-bright)
+        }
+
+        .result {
+            background: linear-gradient(135deg, #f6f0e5, #e9dfcd);
+            border: 1px solid var(--gold)
+        }
+
+        .result .total {
+            color: #101741
+        }
+
+        .btn.main {
+            background: #101741;
+            border: 1px solid var(--gold)
+        }
+
+        .btn.main:hover {
+            background: #20265a
+        }
+
+        .measure-fields {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .measure-result {
+            margin-top: 17px;
+            padding: 17px;
+            border-radius: 15px;
+            background: rgba(215, 180, 106, .1);
+            border: 1px solid rgba(215, 180, 106, .45)
+        }
+
+        .measure-result strong {
+            display: block;
+            font: 800 28px Manrope, sans-serif;
+            color: var(--gold-bright);
+            margin: 3px 0
+        }
+
+        .measure-result p {
+            font-size: 12px;
+            color: var(--muted);
+            margin: 5px 0
+        }
+
+        .measure-btn {
+            margin-top: 12px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+            color: #101741
+        }
+
+        .measure-btn:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        .measure-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin: 12px 0 0
+        }
+
+        @media(max-width:460px) {
+            .measure-fields {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header><a href="./workshop.html" aria-label="Voltar ao portal"><img src="assets/logoad.png"
+                    alt="ArtDesign"></a><a href="./workshop.html">← Voltar ao portal</a></header>
+        <main>
+            <div class="kicker">Workshop Parede Lucrativa · Ferramenta do aluno</div>
+            <h1>Calculadora de orçamento</h1>
+            <p class="lead">Preencha os valores do seu serviço e veja quanto cobrar. <strong>Você decide todos os
+                    preços.</strong></p>
+            <section class="panel" id="rollCalculator">
+                <div class="heading"><span class="number">↔</span>
+                    <h2>Quantos rolos vou precisar?</h2>
+                </div>
+                <p class="hint">Informe apenas a largura e a altura da parede, em metros.</p>
+                <div class="measure-fields">
+                    <div class="field"><label for="wallWidth">Largura da parede (m)</label><input id="wallWidth"
+                            inputmode="decimal" placeholder="Ex.: 3,50"></div>
+                    <div class="field"><label for="wallHeight">Altura da parede (m)</label><input id="wallHeight"
+                            inputmode="decimal" placeholder="Ex.: 2,70"></div>
+                </div>
+                <div class="measure-result" aria-live="polite"><span>Quantidade estimada</span><strong
+                        id="rollEstimate">Preencha as medidas</strong>
+                    <p id="rollDetails">Estimativa para rolos padrão de 0,53 m × 10 m, sem sobra adicional.</p><button
+                        type="button" class="btn measure-btn" id="useRolls" disabled>Usar quantidade no orçamento
+                        ↓</button>
+                </div>
+                <p class="measure-note">Cálculo estimado para rolos de 53 cm × 10 m. Rolos de outras medidas, estampas
+                    com encaixe, recortes e perdas podem mudar a quantidade. Confirme antes de comprar.</p>
+            </section>
+            <section class="panel">
+                <div class="heading"><span class="number">1</span>
+                    <h2>O que você vai fazer?</h2>
+                </div>
+                <p class="hint">Exemplo: instalação de papel de parede, remoção ou acabamento. Para instalação de papel
+                    de parede, informe a quantidade de rolos e o valor cobrado por rolo. Para outros serviços, use a
+                    quantidade de unidades correspondente.</p>
+                <div id="items" class="items"></div><button type="button" class="add" id="add">+ Adicionar outro
+                    serviço</button>
+            </section>
+            <section class="panel">
+                <div class="heading"><span class="number">2</span>
+                    <h2>Quanto você vai gastar?</h2>
+                </div>
+                <p class="hint">Se não tiver algum custo, deixe vazio.</p>
+                <div class="two">
+                    <div class="field"><label for="materials">Materiais e insumos (R$)</label><input id="materials"
+                            inputmode="decimal" placeholder="Digite o valor"></div>
+                    <div class="field"><label for="transport">Transporte (R$)</label><input id="transport"
+                            inputmode="decimal" placeholder="Digite o valor"></div>
+                    <div class="field"><label for="others">Outros gastos (R$)</label><input id="others"
+                            inputmode="decimal" placeholder="Digite o valor"></div>
+                    <div class="field"><label for="extraProfit">Lucro extra sobre os gastos (%)</label><input
+                            id="extraProfit" inputmode="decimal" placeholder="Opcional"></div>
+                </div>
+                <p class="hint" style="margin:14px 0 0">O lucro extra é opcional. Ele é calculado sobre os gastos
+                    informados e somado ao valor dos serviços.</p>
+            </section>
+            <section class="result" aria-live="polite">
+                <h2>3. Seu orçamento está pronto!</h2>
+                <div class="total" id="total">R$ 0,00</div>
+                <div class="breakdown">
+                    <div class="line"><span>Valor dos serviços</span><strong id="servicesTotal">R$ 0,00</strong></div>
+                    <div class="line"><span>Gastos informados</span><strong id="costsTotal">R$ 0,00</strong></div>
+                    <div class="line"><span>Lucro extra sobre os gastos</span><strong id="profitTotal">R$ 0,00</strong>
+                    </div>
+                </div>
+                <div class="actions"><button type="button" class="btn main" id="copy">Copiar proposta para o
+                        cliente</button><button type="button" class="btn secondary" id="clear">Limpar tudo</button>
+                </div>
+                <div class="toast" id="toast" role="status"></div>
+                <p class="notice">Este é um cálculo de apoio. Confira medidas, custos, impostos e condições da
+                    instalação antes de enviar ao cliente. O valor dos serviços já deve considerar sua remuneração.</p>
+            </section>
+        </main>
+        <footer>© 2026 ArtDesign · Excelência é nossa especialidade.</footer>
+    </div>
+    <script>
+        (() => {
+            'use strict'; const $ = id => document.getElementById(id), money = n => new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(n), num = v => {let s = String(v || '').trim().replace(/[^\d,.-]/g, ''); if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.'); const n = Number(s); return Number.isFinite(n) && n > 0 ? n : 0}; let seq = 0; const items = $('items'); function addItem() {const id = ++seq; const el = document.createElement('div'); el.className = 'item'; el.innerHTML = `<div class="fields"><div class="field"><label for="name${id}">Serviço</label><input id="name${id}" class="name" placeholder="Ex.: Instalação de papel de parede"></div><div class="field"><label for="qty${id}">Quantidade de rolos</label><input id="qty${id}" class="qty" inputmode="decimal" placeholder="Ex.: 3 rolos"></div><div class="field"><label for="price${id}">Valor por rolo (R$)</label><input id="price${id}" class="price" inputmode="decimal" placeholder="Digite o valor"></div></div><div class="item-actions"><button type="button" class="text-btn remove">Remover serviço</button></div>`; el.querySelector('.remove').addEventListener('click', () => {el.remove(); if (!items.children.length) addItem(); calc()}); items.append(el); calc()}
+            let estimatedRolls = 0;
+            function calculateRolls() {const w = num($('wallWidth').value), h = num($('wallHeight').value), rw = 0.53, rl = 10, extra = 0; const output = $('rollEstimate'), details = $('rollDetails'), use = $('useRolls'); estimatedRolls = 0; if (!(w > 0 && h > 0)) {output.textContent = 'Preencha as medidas'; details.textContent = 'Estimativa para rolos padrão de 0,53 m × 10 m, sem sobra adicional.'; use.disabled = true; return } const perRoll = Math.floor((rl + 1e-9) / (h + extra)); if (perRoll < 1) {output.textContent = 'Rolo insuficiente'; details.textContent = 'O comprimento do rolo é menor que a altura da faixa necessária. Confira as medidas.'; use.disabled = true; return } const strips = Math.ceil(w / rw - 1e-9); estimatedRolls = Math.ceil(strips / perRoll); output.textContent = estimatedRolls + ' ' + (estimatedRolls === 1 ? 'rolo' : 'rolos'); details.textContent = `${strips} faixa(s) necessárias • ${perRoll} faixa(s) por rolo. Estimativa sem ajuste de encaixe da estampa.`; use.disabled = false}
+            $('useRolls').addEventListener('click', () => {if (!estimatedRolls) return; let item = items.firstElementChild; if (!item) {addItem(); item = items.firstElementChild} item.querySelector('.qty').value = estimatedRolls; if (!item.querySelector('.name').value.trim()) item.querySelector('.name').value = 'Instalação de papel de parede'; calc(); item.scrollIntoView({behavior: 'smooth', block: 'center'}); item.querySelector('.price').focus({preventScroll: true})});
+            function calc() {let services = 0; for (const el of items.children) {services += num(el.querySelector('.qty').value) * num(el.querySelector('.price').value)} const costs = num($('materials').value) + num($('transport').value) + num($('others').value); const profit = costs * num($('extraProfit').value) / 100; const total = services + costs + profit; $('servicesTotal').textContent = money(services); $('costsTotal').textContent = money(costs); $('profitTotal').textContent = money(profit); $('total').textContent = money(total); return {services, costs, profit, total}}
+            function budgetText() {
+                const r = calc();
+                const lines = ['*ORÇAMENTO DE SERVIÇOS*', '', 'Olá! Tudo bem? 😊', '', 'Segue nossa proposta para a realização do serviço solicitado:', ''];
+                let count = 0;
+                for (const el of items.children) {
+                    const name = el.querySelector('.name').value.trim() || 'Serviço';
+                    const q = num(el.querySelector('.qty').value), p = num(el.querySelector('.price').value);
+                    if (q > 0 && p > 0) {
+                        count++;
+                        const qty = Number.isInteger(q) ? String(q) : q.toLocaleString('pt-BR');
+                        lines.push(`*${count}. ${name}*`, `Quantidade: ${qty} ${/papel de parede|instalação/i.test(name) ? 'rolo(s)' : 'unidade(s)'}`, `Valor unitário: ${money(p)}`, `Subtotal: ${money(q * p)}`, '');
+                    }
+                }
+                if (!count) lines.push('Serviço a definir', '');
+                lines.push(`*VALOR TOTAL DO ORÇAMENTO: ${money(r.total)}*`, '', 'O valor apresentado corresponde à proposta completa para os serviços descritos acima.', 'Ficamos à disposição para esclarecer dúvidas e combinar os próximos passos.', '', 'Agradecemos pela confiança!');
+                return lines.join('\n');
+            }
+            $('add').addEventListener('click', addItem); document.addEventListener('input', e => {if (e.target.matches('input')) {calc(); calculateRolls()} }); $('clear').addEventListener('click', () => {items.innerHTML = ''; for (const id of ['wallWidth', 'wallHeight', 'materials', 'transport', 'others', 'extraProfit']) $(id).value = ''; addItem(); calculateRolls(); $('toast').textContent = 'Campos limpos.'}); $('copy').addEventListener('click', async () => {const text = budgetText(); try {await navigator.clipboard.writeText(text); $('toast').textContent = 'Proposta copiada! Cole no WhatsApp do cliente.'} catch {const t = document.createElement('textarea'); t.value = text; document.body.append(t); t.select(); const ok = document.execCommand('copy'); t.remove(); $('toast').textContent = ok ? 'Proposta copiada! Cole no WhatsApp do cliente.' : 'Não foi possível copiar automaticamente.'} }); addItem()
+        })();
+    </script>
+</body>
+
+</html>
